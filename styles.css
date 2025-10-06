@@ -4,10 +4,10 @@
     --font-heading: "Playfair Display", Georgia, serif;
     --color-bg: #050819;
     --gradient-bg:
-        radial-gradient(120% 120% at 0% 0%, rgba(94, 240, 255, 0.28), rgba(5, 8, 25, 0)),
-        radial-gradient(110% 110% at 100% 0%, rgba(255, 109, 200, 0.22), rgba(5, 8, 25, 0)),
-        radial-gradient(140% 140% at 50% 100%, rgba(107, 64, 255, 0.32), rgba(5, 8, 25, 0)),
-        #050819;
+        radial-gradient(120% 90% at 0% 0%, rgba(94, 240, 255, 0.28), rgba(5, 8, 25, 0)),
+        radial-gradient(100% 120% at 100% 0%, rgba(255, 109, 200, 0.2), rgba(5, 8, 25, 0)),
+        radial-gradient(120% 120% at 50% 100%, rgba(107, 64, 255, 0.22), rgba(5, 8, 25, 0)),
+        linear-gradient(180deg, #050819 0%, #020513 100%);
     --color-surface: rgba(10, 13, 35, 0.72);
     --color-text: #f4f6ff;
     --color-muted: #9aa7c7;
@@ -29,7 +29,11 @@ body {
     font-size: 16px;
     line-height: 1.6;
     color: var(--color-text);
-    background: var(--gradient-bg);
+    background-color: var(--color-bg);
+    background-image: var(--gradient-bg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 img,
@@ -51,13 +55,11 @@ a:focus {
 .hero {
     display: grid;
     gap: 2rem;
-    min-height: 60vh;
-    padding: 6rem clamp(1rem, 5vw, 5rem);
-    background: linear-gradient(130deg, rgba(94, 240, 255, 0.16), rgba(175, 74, 248, 0) 60%), rgba(8, 12, 35, 0.68);
-    border: 1px solid var(--outline-soft);
-    border-radius: 28px;
-    box-shadow: var(--shadow-soft);
-    backdrop-filter: blur(12px);
+    min-height: 70vh;
+    padding: clamp(5rem, 8vw, 8rem) clamp(1.5rem, 6vw, 6rem);
+    max-width: 1200px;
+    margin: 0 auto;
+    background: transparent;
     align-items: center;
 }
 
@@ -88,15 +90,6 @@ a:focus {
 .hero__nav a:hover,
 .hero__nav a:focus {
     border-color: var(--color-accent);
-}
-
-.hero__portrait {
-    width: min(300px, 100%);
-    aspect-ratio: 1;
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(94, 240, 255, 0.35), rgba(175, 74, 248, 0.05));
-    box-shadow: var(--shadow-soft);
-    justify-self: center;
 }
 
 .section {
@@ -227,7 +220,6 @@ a:focus {
 
 @media (min-width: 880px) {
     .hero {
-        grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
-        align-items: center;
+        min-height: 80vh;
     }
 }
