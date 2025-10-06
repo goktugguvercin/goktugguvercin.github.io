@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doodle | Personal Site</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="hero__content">
+            <h1>Your Name</h1>
+            <p class="hero__tagline">Researcher · Writer · Lifelong Learner</p>
+            <nav class="hero__nav">
+                <a href="#about">About</a>
+                <a href="#blog">Blog</a>
+                <a href="#publications">Publications</a>
+            </nav>
+        </div>
+        <div class="hero__portrait" aria-hidden="true"></div>
+    </header>
+
+    <main>
+        <section id="about" class="section">
+            <div class="section__inner">
+                <h2>About</h2>
+                <p>
+                    Add a concise bio here that highlights your work, research interests, or anything
+                    else visitors should know within the first few seconds. You can also include a
+                    short list of keywords or your current role.
+                </p>
+                <ul class="about__details">
+                    <li><strong>Current role:</strong> Your Title @ Organization</li>
+                    <li><strong>Research areas:</strong> Topic One, Topic Two, Topic Three</li>
+                    <li><strong>Email:</strong> <a href="mailto:you@example.com">you@example.com</a></li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="blog" class="section section--accent">
+            <div class="section__inner">
+                <h2>Blog</h2>
+                <p class="section__intro">
+                    Highlight recent writing. Link to posts hosted elsewhere or add static pages later.
+                </p>
+                <article class="card">
+                    <h3><a href="#">How I Approach Problem Solving</a></h3>
+                    <p class="card__meta">January 17, 2024</p>
+                    <p>
+                        A quick walkthrough of the frameworks I lean on when tackling tough product
+                        and research challenges.
+                    </p>
+                </article>
+                <article class="card">
+                    <h3><a href="#">Notes on Recent Experiments</a></h3>
+                    <p class="card__meta">December 3, 2023</p>
+                    <p>
+                        Experiments that worked, those that did not, and the insights gathered along
+                        the way.
+                    </p>
+                </article>
+                <p class="section__cta">
+                    <a href="#" class="button">View all posts</a>
+                </p>
+            </div>
+        </section>
+
+        <section id="publications" class="section">
+            <div class="section__inner">
+                <h2>Publications</h2>
+                <ol class="publications">
+                    <li>
+                        <h3>Title of Publication One</h3>
+                        <p class="publications__meta">Journal Name, 2023 • Co-authors: A. Researcher, B. Collaborator</p>
+                        <a class="publications__link" href="#">Read publication</a>
+                    </li>
+                    <li>
+                        <h3>Another Insightful Paper</h3>
+                        <p class="publications__meta">Conference XYZ, 2022 • Co-authors: C. Scientist, D. Analyst</p>
+                        <a class="publications__link" href="#">Read publication</a>
+                    </li>
+                    <li>
+                        <h3>Earlier Work Worth Sharing</h3>
+                        <p class="publications__meta">Workshop ABC, 2021</p>
+                        <a class="publications__link" href="#">Read publication</a>
+                    </li>
+                </ol>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer__inner">
+            <p>&copy; <span id="year"></span> Your Name. All rights reserved.</p>
+            <div class="footer__links">
+                <a href="https://github.com/your-handle">GitHub</a>
+                <a href="https://linkedin.com/in/your-handle">LinkedIn</a>
+                <a href="mailto:you@example.com">Email</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Keep the footer year current without manual edits
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
