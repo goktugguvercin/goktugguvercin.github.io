@@ -1,14 +1,20 @@
 :root {
-    color-scheme: light dark;
+    color-scheme: dark;
     --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
     --font-heading: "Playfair Display", Georgia, serif;
-    --color-bg: #fdfdfd;
-    --color-surface: rgba(255, 255, 255, 0.8);
-    --color-text: #1c1c1c;
-    --color-muted: #5f5f5f;
-    --color-accent: #5a67d8;
-    --color-accent-soft: rgba(90, 103, 216, 0.1);
-    --shadow-soft: 0 18px 40px -24px rgba(20, 20, 20, 0.45);
+    --color-bg: #050819;
+    --gradient-bg:
+        radial-gradient(120% 120% at 0% 0%, rgba(94, 240, 255, 0.28), rgba(5, 8, 25, 0)),
+        radial-gradient(110% 110% at 100% 0%, rgba(255, 109, 200, 0.22), rgba(5, 8, 25, 0)),
+        radial-gradient(140% 140% at 50% 100%, rgba(107, 64, 255, 0.32), rgba(5, 8, 25, 0)),
+        #050819;
+    --color-surface: rgba(10, 13, 35, 0.72);
+    --color-text: #f4f6ff;
+    --color-muted: #9aa7c7;
+    --color-accent: #5ef0ff;
+    --color-accent-soft: rgba(94, 240, 255, 0.2);
+    --shadow-soft: 0 24px 60px -30px rgba(2, 5, 20, 0.8);
+    --outline-soft: rgba(148, 163, 184, 0.18);
 }
 
 *,
@@ -23,7 +29,7 @@ body {
     font-size: 16px;
     line-height: 1.6;
     color: var(--color-text);
-    background: var(--color-bg);
+    background: var(--gradient-bg);
 }
 
 img,
@@ -47,7 +53,11 @@ a:focus {
     gap: 2rem;
     min-height: 60vh;
     padding: 6rem clamp(1rem, 5vw, 5rem);
-    background: linear-gradient(135deg, var(--color-accent-soft), transparent 55%), #f5f7ff;
+    background: linear-gradient(130deg, rgba(94, 240, 255, 0.16), rgba(175, 74, 248, 0) 60%), rgba(8, 12, 35, 0.68);
+    border: 1px solid var(--outline-soft);
+    border-radius: 28px;
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(12px);
     align-items: center;
 }
 
@@ -84,23 +94,34 @@ a:focus {
     width: min(300px, 100%);
     aspect-ratio: 1;
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(90, 103, 216, 0.4), rgba(90, 103, 216, 0));
+    background: linear-gradient(135deg, rgba(94, 240, 255, 0.35), rgba(175, 74, 248, 0.05));
     box-shadow: var(--shadow-soft);
     justify-self: center;
 }
 
 .section {
     padding: clamp(3rem, 5vw, 5rem) clamp(1rem, 5vw, 5rem);
-    background: var(--color-bg);
+    background: transparent;
 }
 
 .section--accent {
-    background: rgba(245, 247, 255, 0.6);
+    background: transparent;
 }
 
 .section__inner {
     max-width: 860px;
     margin: 0 auto;
+    padding: clamp(2.25rem, 4vw, 3.25rem);
+    background: rgba(5, 8, 25, 0.68);
+    border-radius: 24px;
+    border: 1px solid var(--outline-soft);
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(16px);
+}
+
+.section--accent .section__inner {
+    background: rgba(94, 240, 255, 0.1);
+    border-color: rgba(94, 240, 255, 0.24);
 }
 
 .section__intro {
@@ -120,6 +141,7 @@ a:focus {
     background: var(--color-surface);
     border-radius: 12px;
     box-shadow: var(--shadow-soft);
+    border: 1px solid var(--outline-soft);
     margin: 1.5rem 0;
     backdrop-filter: blur(8px);
 }
@@ -140,16 +162,18 @@ a:focus {
     justify-content: center;
     padding: 0.6rem 1.5rem;
     border-radius: 999px;
-    background: var(--color-accent);
-    color: #fff;
+    background: linear-gradient(135deg, var(--color-accent), rgba(255, 109, 200, 0.8));
+    color: #041019;
     font-weight: 600;
     box-shadow: var(--shadow-soft);
+    border: none;
 }
 
 .button:hover,
 .button:focus {
-    opacity: 0.9;
+    opacity: 0.95;
     text-decoration: none;
+    transform: translateY(-1px);
 }
 
 .publications {
@@ -175,8 +199,10 @@ a:focus {
 
 .footer {
     padding: 2.5rem clamp(1rem, 5vw, 5rem);
-    background: #0b1023;
-    color: rgba(255, 255, 255, 0.87);
+    background: rgba(5, 8, 25, 0.92);
+    color: rgba(244, 246, 255, 0.87);
+    border-top: 1px solid var(--outline-soft);
+    box-shadow: 0 -16px 40px -32px rgba(2, 5, 20, 0.8);
 }
 
 .footer__inner {
@@ -196,7 +222,7 @@ a:focus {
 }
 
 .footer__links a {
-    color: rgba(255, 255, 255, 0.87);
+    color: rgba(244, 246, 255, 0.87);
 }
 
 @media (min-width: 880px) {
