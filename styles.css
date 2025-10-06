@@ -1,47 +1,20 @@
-:root {
-    color-scheme: dark;
-    --font-body: "Inter", "Helvetica Neue", Arial, sans-serif;
-    --font-heading: "Playfair Display", Georgia, serif;
-    --color-bg: #050819;
-    --gradient-bg:
-        radial-gradient(120% 90% at 0% 0%, rgba(94, 240, 255, 0.32), rgba(5, 8, 25, 0)),
-        radial-gradient(110% 120% at 100% 0%, rgba(255, 109, 200, 0.24), rgba(5, 8, 25, 0)),
-        radial-gradient(130% 130% at 50% 100%, rgba(107, 64, 255, 0.18), rgba(5, 8, 25, 0)),
-        linear-gradient(185deg, #050819 0%, #02040e 100%);
-    --color-text: #f5f7ff;
-}
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
 body {
+    background-color: #fcfcfc;
     margin: 0;
     min-height: 100vh;
-    font-family: var(--font-body);
-    color: var(--color-text);
-    background-color: var(--color-bg);
-    background-image: var(--gradient-bg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
+    font-family: sans-serif;
 }
 
 .site-header {
-    position: fixed;
-    top: clamp(2rem, 5vw, 4rem);
-    left: 50%;
-    transform: translateX(-50%);
+    padding-top: 2rem;
     text-align: center;
 }
 
 .site-title {
     margin: 0;
-    font-family: var(--font-heading);
-    font-size: clamp(2.5rem, 6vw, 4.75rem);
-    letter-spacing: -0.02em;
+    font-size: 2rem;
+    color: #000;
 }
