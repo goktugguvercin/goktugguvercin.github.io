@@ -260,7 +260,7 @@
             },
             "sampling-frequency-audio": {
                 title: "Sampling and Frequency in Audio ML Models",
-                date: "November 5, 2025",
+                date: "November 13, 2025",
                 tags: ["Audio Processing", "Signal Processing", "Digital Audio", "Speech Recognition"],
                 content: `
                     <h2>From Analog to Digital Audio</h2>
@@ -282,8 +282,7 @@
                     <p>$$F_s \\text{ samples} \\Leftrightarrow 1 \\text{ second}$$</p>
                     <p>$$F_s/F \\text{ samples} \\Leftrightarrow 1 \\text{ cycle}$$</p>
                     
-                    <h2>The Critical Problem: Aliasing</h2>
-                    <p>This leads to a critical problem. What if we set our sampling rate to be exactly twice the frequency? At this point, one important problem may occur. What if we set our sampling rate to be exactly twice the frequency $F$ (i.e., $F_s = 100$)? Based on our formula, this would give us 2 samples per cycle.</p>
+                    <p>What if we set our sampling rate to be exactly twice the frequency? At this point, one important problem may occur. What if we set our sampling rate to be exactly twice the frequency $F$ (i.e., $F_s = 100$)? Based on our formula, this would give us 2 samples per cycle.</p>
                     
                     <p>These two samples might just capture the peak and the trough (a "high, low, high, low..." pattern). The issue is that many different waves, such as sine waves with the frequencies of $F$, $3F$, and $5F$, can all pass through these exact same points. In other words, the samples fail to characterize the original waveform distinctively.</p>
                     
@@ -292,13 +291,10 @@
                     
                     <p>$$\\frac{F_s}{F} > 2 \\Longleftrightarrow F_{max} < \\frac{F_s}{2}$$</p>
                     
-                    <p>The definition of $F_{max}$ states that the highest frequency we can accurately capture must be <em>less than half</em> of our sampling rate $F_s$. This proves that higher sampling rate covers higher frequencies.</p>
-                    
-                    <h2>Practical Applications in Speech Processing</h2>
-                    <p>For example, to be able to hear someone's speech clearly, 8 KHz frequency is quite sufficient; more than that is not so required. In that case, we generally re-sample the audio records of human speech in 16 KHz.</p>
+                    <p>The definition of $F_{max}$ states that the highest frequency we can accurately capture must be <em>less than half</em> of our sampling rate $F_s$. This proves that higher sampling rate covers higher frequencies. For example, to be able to hear someone's speech clearly, 8 KHz frequency is quite sufficient; more than that is not so required. In that case, we generally re-sample the audio records of human speech in 16 KHz.</p>
                     
                     <h3>Machine Learning Models and 16 KHz Standard</h3>
-                    <p>Understanding the relationship between sampling rate and frequency is fundamental in digital audio processing. In both training and inference stages, the audio records are specifically re-sampled into 16 KHz, as a de-facto standard for speech recognition models. Whisper, Moonshine, Wav2Vec 2.0, and HuBERT are several state-of-the-art ML models designed around 16 KHz audio.</p>
+                    <p>Understanding the relationship between sampling rate and frequency is fundamental in digital audio processing. In both training and inference stages, the audio records are specifically re-sampled into 16 KHz, as a de-facto standard for speech recognition models. Whisper, HuBERT, Moonshine, and Wav2Vec 2.0 are several state-of-the-art ML models designed around 16 KHz audio.</p>
                     
                     <h2>Conclusion</h2>
                     <p>The Nyquist-Shannon theorem provides the theoretical foundation for determining appropriate sampling rates for different audio applications. By ensuring that our sampling rate is more than twice the highest frequency we want to capture, we can accurately represent audio signals digitally, whether for speech recognition, music reproduction, or other audio processing tasks.</p>
