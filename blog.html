@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Goktug Guvercin</title>
+    <style>
+        body {
+            background-color: #f5ebe0;
+            margin: 0;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .navigation {
+            background-color: #d4a373;
+            padding: 1rem 0;
+            width: 100%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        .nav-item:hover {
+            background-color: #c4935e;
+            transform: translateY(-2px);
+        }
+
+        .nav-item.active {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 100px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .blog-title {
+            font-size: 2.5rem;
+            color: #2c2c2c;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            font-style: italic;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 968px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .blog-card {
+            background-color: white;
+            border: 3px solid #2c2c2c;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            background-color: #fafafa;
+        }
+
+        .blog-card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .blog-card-date {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item">About</a>
+            <a href="projects.html" class="nav-item">Projects</a>
+            <a href="blog.html" class="nav-item active">Blog</a>
+        </div>
+    </nav>
+
+    <div class="blog-container">
+        <header class="blog-header">
+            <h1 class="blog-title">Blog</h1>
+            <p class="blog-subtitle">Thoughts on machine learning, research, and technology</p>
+        </header>
+
+        <div class="blog-grid" id="blogGrid">
+            <!-- Blog cards will be generated here by JavaScript -->
+        </div>
+    </div>
+
+    <script>
+        // Blog posts data - Add your blog posts here
+        const blogPosts = [
+            {
+                id: 1,
+                title: "Transformers and Attention Mechanism",
+                date: "November 10, 2025",
+                slug: "transformers-attention-mechanism"
+            },
+            {
+                id: 2,
+                title: "Sampling and Frequency in Audio Models",
+                date: "November 5, 2025",
+                slug: "sampling-frequency-audio"
+            },
+            {
+                id: 3,
+                title: "Understanding Neural Networks",
+                date: "October 28, 2025",
+                slug: "understanding-neural-networks"
+            },
+            {
+                id: 4,
+                title: "Deep Learning Optimization",
+                date: "October 15, 2025",
+                slug: "deep-learning-optimization"
+            },
+            {
+                id: 5,
+                title: "Computer Vision Basics",
+                date: "October 1, 2025",
+                slug: "computer-vision-basics"
+            },
+            {
+                id: 6,
+                title: "Reinforcement Learning",
+                date: "September 20, 2025",
+                slug: "reinforcement-learning"
+            }
+        ];
+
+        // Generate blog cards
+        const blogGrid = document.getElementById('blogGrid');
+        
+        blogPosts.forEach(post => {
+            const card = document.createElement('a');
+            card.href = `blog-post.html?id=${post.slug}`;
+            card.className = 'blog-card';
+            
+            card.innerHTML = `
+                <div>
+                    <h3 class="blog-card-title">${post.title}</h3>
+                    <div class="blog-card-date">${post.date}</div>
+                </div>
+            `;
+            
+            blogGrid.appendChild(card);
+        });
+    </script>
+</body>
+</html>

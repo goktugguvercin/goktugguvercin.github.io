@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - Goktug Guvercin</title>
+    
+    <!-- MathJax for LaTeX rendering -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    
+    <style>
+        body {
+            background-color: #f5ebe0;
+            margin: 0;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        .navigation {
+            background-color: #d4a373;
+            padding: 1rem 0;
+            width: 100%;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 0 2rem;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #2c2c2c;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.5rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        .nav-item:hover {
+            background-color: #c4935e;
+            transform: translateY(-2px);
+        }
+
+        .nav-item.active {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .post-container {
+            max-width: 800px;
+            margin: 100px auto 2rem;
+            padding: 0 2rem;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #2c2c2c;
+            text-decoration: none;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #1a73e8;
+        }
+
+        .back-link::before {
+            content: "←";
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .post-header {
+            margin-bottom: 2rem;
+        }
+
+        .post-date {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: #1a1a1a;
+            margin: 0 0 1rem 0;
+            line-height: 1.2;
+        }
+
+        .post-content {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .post-content h2 {
+            color: #1a1a1a;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .post-content h3 {
+            color: #2c2c2c;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.4rem;
+        }
+
+        .post-content p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-content code {
+            background-color: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .post-content pre {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .post-content pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .post-content ul, .post-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .post-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background-color: #d4a373;
+            color: #2c2c2c;
+            padding: 0.4rem 1rem;
+            border-radius: 16px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="index.html" class="nav-item">About</a>
+            <a href="projects.html" class="nav-item">Projects</a>
+            <a href="blog.html" class="nav-item active">Blog</a>
+        </div>
+    </nav>
+
+    <div class="post-container">
+        <a href="blog.html" class="back-link">Back to Blog</a>
+        
+        <article>
+            <header class="post-header">
+                <div class="post-date" id="postDate">Loading...</div>
+                <h1 class="post-title" id="postTitle">Loading...</h1>
+            </header>
+
+            <div class="post-content" id="postContent">
+                <!-- Blog post content will be loaded here -->
+            </div>
+
+            <div class="post-tags" id="postTags">
+                <!-- Tags will be loaded here -->
+            </div>
+        </article>
+    </div>
+
+    <script>
+        // Blog posts content database
+        const blogPostsContent = {
+            "transformers-attention-mechanism": {
+                title: "Transformers and Attention Mechanism",
+                date: "November 10, 2025",
+                tags: ["Machine Learning", "NLP", "Transformers"],
+                content: `
+                    <h2>Introduction</h2>
+                    <p>The transformer architecture has revolutionized natural language processing and many other domains of machine learning. In this post, we'll explore the key innovation that makes transformers so powerful: the attention mechanism.</p>
+                    
+                    <h2>What is Attention?</h2>
+                    <p>At its core, attention allows a model to focus on relevant parts of the input when processing each element. Unlike traditional sequential models like RNNs, transformers can attend to any part of the sequence directly.</p>
+                    
+                    <h3>The Attention Formula</h3>
+                    <p>The scaled dot-product attention is computed as:</p>
+                    <p>$$\\text{Attention}(Q, K, V) = \\text{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V$$</p>
+                    
+                    <p>Where $d_k$ is the dimension of the key vectors. The division by $\\sqrt{d_k}$ prevents the dot products from becoming too large.</p>
+                    
+                    <h2>Key Components</h2>
+                    <ul>
+                        <li><strong>Query (Q):</strong> What we're looking for</li>
+                        <li><strong>Key (K):</strong> What we're matching against</li>
+                        <li><strong>Value (V):</strong> The actual information we retrieve</li>
+                    </ul>
+                    
+                    <h3>Multi-Head Attention</h3>
+                    <p>Instead of performing a single attention function, multi-head attention runs $h$ attention mechanisms in parallel:</p>
+                    <p>$$\\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, ..., \\text{head}_h)W^O$$</p>
+                    <p>where each head is: $\\text{head}_i = \\text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$</p>
+                    
+                    <h2>Example: Adding an Image</h2>
+                    <p>You can easily add images to your blog posts. Here's the syntax:</p>
+                    <pre><code>&lt;img src="path/to/your/image.png" alt="Description"&gt;</code></pre>
+                    
+                    <h2>Conclusion</h2>
+                    <p>Understanding the attention mechanism is crucial for working with modern NLP models. This foundational concept enables transformers to process sequences efficiently and effectively.</p>
+                `
+            },
+            "sampling-frequency-audio": {
+                title: "Sampling and Frequency in Audio Models",
+                date: "November 5, 2025",
+                tags: ["Audio Processing", "Signal Processing", "Machine Learning"],
+                content: `
+                    <h2>Understanding Audio Signals</h2>
+                    <p>When working with audio in machine learning, understanding sampling rate and frequency is fundamental. Let's break down these concepts.</p>
+                    
+                    <h2>What is Sampling Rate?</h2>
+                    <p>Sampling rate refers to how many times per second we measure the audio signal. Common sampling rates include:</p>
+                    <ul>
+                        <li>8 kHz - Telephone quality</li>
+                        <li>16 kHz - Speech recognition</li>
+                        <li>44.1 kHz - CD quality</li>
+                        <li>48 kHz - Professional audio</li>
+                    </ul>
+                    
+                    <h2>Nyquist Theorem</h2>
+                    <p>The Nyquist theorem states that to accurately represent a signal, you must sample at least twice the highest frequency present in the signal.</p>
+                    
+                    <h2>Applications in ML</h2>
+                    <p>Understanding these concepts is crucial for audio-based machine learning tasks like speech recognition, music generation, and audio classification.</p>
+                `
+            },
+            "understanding-neural-networks": {
+                title: "Understanding Neural Networks",
+                date: "October 28, 2025",
+                tags: ["Deep Learning", "Neural Networks", "Fundamentals"],
+                content: `
+                    <h2>Introduction to Neural Networks</h2>
+                    <p>Neural networks are the foundation of modern deep learning. This post covers the basics from perceptrons to deep architectures.</p>
+                    
+                    <h2>The Perceptron</h2>
+                    <p>The simplest neural network unit is the perceptron, which takes multiple inputs and produces a single output through a weighted sum and activation function.</p>
+                    
+                    <h2>Backpropagation</h2>
+                    <p>Backpropagation is the algorithm used to train neural networks by computing gradients of the loss with respect to the weights.</p>
+                    
+                    <h3>Key Steps</h3>
+                    <ol>
+                        <li>Forward pass: Compute predictions</li>
+                        <li>Compute loss</li>
+                        <li>Backward pass: Compute gradients</li>
+                        <li>Update weights</li>
+                    </ol>
+                    
+                    <h2>Activation Functions</h2>
+                    <p>Common activation functions include ReLU, sigmoid, and tanh, each with different properties and use cases.</p>
+                `
+            }
+        };
+
+        // Get post ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const postId = urlParams.get('id');
+
+        // Load post content
+        if (postId && blogPostsContent[postId]) {
+            const post = blogPostsContent[postId];
+            document.getElementById('postTitle').textContent = post.title;
+            document.getElementById('postDate').textContent = post.date;
+            document.getElementById('postContent').innerHTML = post.content;
+            document.title = `${post.title} - Goktug Guvercin`;
+
+            // Add tags
+            const tagsContainer = document.getElementById('postTags');
+            post.tags.forEach(tag => {
+                const tagElement = document.createElement('span');
+                tagElement.className = 'tag';
+                tagElement.textContent = tag;
+                tagsContainer.appendChild(tagElement);
+            });
+        } else {
+            // Post not found
+            document.getElementById('postTitle').textContent = 'Post Not Found';
+            document.getElementById('postDate').textContent = '';
+            document.getElementById('postContent').innerHTML = '<p>Sorry, this blog post could not be found.</p>';
+        }
+    </script>
+</body>
+</html>
