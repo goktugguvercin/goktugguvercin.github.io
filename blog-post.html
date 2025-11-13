@@ -282,12 +282,12 @@
                     <p>$$F_s \\text{ samples} \\Leftrightarrow 1 \\text{ second}$$</p>
                     <p>$$F_s/F \\text{ samples} \\Leftrightarrow 1 \\text{ cycle}$$</p>
                     
-                    <p>What if we set our sampling rate to be exactly twice the frequency? At this point, one important problem may occur. What if we set our sampling rate to be exactly twice the frequency $F$ (i.e., $F_s = 100$)? Based on our formula, this would give us 2 samples per cycle.</p>
+                    <p>What if we set our sampling rate to be exactly twice the frequency $F$ (i.e., $F_s = 100$)? At this point, one important problem may occur. Based on our formula, this would give us 2 samples per cycle.</p>
                     
                     <p>These two samples might just capture the peak and the trough (a "high, low, high, low..." pattern). The issue is that many different waves, such as sine waves with the frequencies of $F$, $3F$, and $5F$, can all pass through these exact same points. In other words, the samples fail to characterize the original waveform distinctively.</p>
                     
-                    <h2>The Nyquist-Shannon Sampling Theorem</h2>
-                    <p>This leads us to reach the <strong>Nyquist–Shannon sampling theorem</strong>, which states that we need <strong>more than 2 samples per cycle</strong> to capture a frequency correctly. We can express this with an inequality:</p>
+                    <h2>Nyquist-Shannon Sampling Theorem</h2>
+                    <p>Nyquist–Shannon sampling theorem states that we need <strong>more than 2 samples per cycle</strong> to capture a frequency correctly. We can express this with an inequality:</p>
                     
                     <p>$$\\frac{F_s}{F} > 2 \\Longleftrightarrow F_{max} < \\frac{F_s}{2}$$</p>
                     
