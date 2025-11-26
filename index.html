@@ -121,7 +121,26 @@
             margin: 0 0 1rem 0;
             padding-bottom: 0.5rem;
             border-bottom: 3px solid #d4a373;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+
+        .category-title:hover {
+            color: #d4a373;
+        }
+
+        .category-icon {
+            transition: transform 0.3s ease;
+            font-size: 1rem;
+            color: #d4a373;
+        }
+
+        .interest-category.collapsed .category-icon {
+            transform: rotate(-90deg);
         }
 
         .interests-list {
@@ -129,6 +148,16 @@
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
             margin-top: 1rem;
+            max-height: 1000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+
+        .interest-category.collapsed .interests-list {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0;
         }
 
         @media (max-width: 968px) {
@@ -153,6 +182,9 @@
             color: white;
             transition: transform 0.2s ease, background-color 0.2s ease;
             cursor: default;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .interest-item:hover {
@@ -222,7 +254,10 @@
                 <h2>Expertise</h2>
                 
                 <div class="interest-category">
-                    <h3 class="category-title">Paradigms and Methodologies</h3>
+                    <h3 class="category-title" onclick="toggleCategory(this)">
+                        <span>Paradigms and Methodologies</span>
+                        <span class="category-icon">▼</span>
+                    </h3>
                     <div class="interests-list">
                         <div class="interest-item">Supervised Learning</div>
                         <div class="interest-item">Self-Supervised Learning</div>
@@ -236,7 +271,10 @@
                 </div>
 
                 <div class="interest-category">
-                    <h3 class="category-title">Training and Alignment</h3>
+                    <h3 class="category-title" onclick="toggleCategory(this)">
+                        <span>Training and Alignment</span>
+                        <span class="category-icon">▼</span>
+                    </h3>
                     <div class="interests-list">
                         <div class="interest-item">Parameter Efficient Finetuning (LoRA, QLoRA)</div>
                         <div class="interest-item">Direct Preference Optimization (DPO)</div>
@@ -248,7 +286,10 @@
                 </div>
 
                 <div class="interest-category">
-                    <h3 class="category-title">Generative and Agentic AI</h3>
+                    <h3 class="category-title" onclick="toggleCategory(this)">
+                        <span>Generative and Agentic AI</span>
+                        <span class="category-icon">▼</span>
+                    </h3>
                     <div class="interests-list">
                         <div class="interest-item">Attention Systems</div>
                         <div class="interest-item">Large Language Models</div>
@@ -281,5 +322,12 @@
             </section>
         </div>
     </div>
+
+    <script>
+        function toggleCategory(titleElement) {
+            const category = titleElement.parentElement;
+            category.classList.toggle('collapsed');
+        }
+    </script>
 </body>
 </html>
