@@ -3,226 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projects - Goktug Guvercin - Machine Learning Scientist">
     <title>Projects - Goktug Guvercin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#f5ebe0',
+              gold: '#d4a373',
+              dark: '#2c2c2c',
+              sand: '#ede5d8',
+              gray: { primary: '#5a5a5a', secondary: '#666666' }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            backgroundImage: {
+              'warm-radial': 'radial-gradient(circle at 15% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 25%), radial-gradient(circle at 85% 30%, rgba(26, 115, 232, 0.05) 0%, transparent 25%)',
+            }
+          }
+        }
+      }
+    </script>
+
     <style>
-        body {
-            background-color: #f5ebe0;
-            margin: 0;
-            min-height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-        }
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5ebe0; }
+        ::-webkit-scrollbar-thumb { background: #d4a373; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c29365; }
 
-        .navigation {
-            background-color: #d4a373;
-            padding: 1rem 0;
-            width: 100%;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            padding: 0 2rem;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            color: #2c2c2c;
-            font-size: 1.1rem;
-            font-weight: 500;
-            padding: 0.5rem 1.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            background-color: transparent;
-        }
-
-        .nav-item:hover {
-            background-color: #c4935e;
-            transform: translateY(-2px);
-        }
-
-        .nav-item.active {
-            background-color: #1a73e8;
-            color: white;
-        }
-
-        .projects-container {
-            max-width: 1000px;
-            margin: 100px auto 2rem;
-            padding: 0 2rem;
-        }
-
-        .page-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .page-title {
-            font-size: 2.5rem;
-            color: #2c2c2c;
-            margin-bottom: 0.5rem;
-        }
-
-        .page-subtitle {
-            font-size: 1.1rem;
-            color: #666;
-            font-style: italic;
-        }
-
-        .projects-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .project-card {
-            background-color: white;
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
-        }
-
-        .project-title {
-            font-size: 1.8rem;
-            color: #1a1a1a;
-            margin: 0 0 0.5rem 0;
-        }
-
-        .project-description {
-            color: #555;
-            line-height: 1.7;
-            margin: 1rem 0;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            background-color: #d4a373;
-            color: #2c2c2c;
-            padding: 0.3rem 0.8rem;
-            border-radius: 16px;
-            font-size: 0.85rem;
-        }
-
-        .project-links {
-            margin-top: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-link {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .project-link:hover {
-            color: #0d47a1;
-            text-decoration: underline;
-        }
-
-        .coming-soon {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: #666;
-            font-size: 1.2rem;
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
-<body>
-    <nav class="navigation">
-        <div class="nav-container">
-            <a href="index.html" class="nav-item">About</a>
-            <a href="projects.html" class="nav-item active">Projects</a>
-            <a href="blog.html" class="nav-item">Blog</a>
+<body class="bg-cream bg-warm-radial bg-fixed min-h-screen text-dark font-sans antialiased pb-16">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gold/30 py-4">
+        <div class="max-w-[900px] mx-auto px-8 flex justify-center gap-10">
+            <a href="index-tailwind-elegant.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                About
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="projects-tailwind.html" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Projects
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-full transition-all duration-300"></span>
+            </a>
+            <a href="blog-tailwind.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Blog
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
         </div>
     </nav>
 
-    <div class="projects-container">
-        <header class="page-header">
-            <h1 class="page-title">Projects</h1>
-            <p class="page-subtitle">Research projects and implementations</p>
+    <div class="mt-[120px] w-full max-w-[900px] mx-auto px-6 md:px-8 fade-in">
+        
+        <header class="text-center mb-16">
+            <h1 class="font-serif text-5xl md:text-6xl font-bold text-dark mb-4">Projects</h1>
+            <p class="text-lg md:text-xl text-gray-secondary italic">Selected works in Deep Learning and NLP</p>
         </header>
 
-        <div class="projects-list">
-            <!-- Example Project 1 -->
-            <article class="project-card">
-                <h2 class="project-title">Transformer Implementation from Scratch</h2>
-                <p class="project-description">
-                    A clean, educational implementation of the transformer architecture in PyTorch. 
-                    This project breaks down the attention mechanism and multi-head attention to help 
-                    understand how modern language models work.
-                </p>
-                <div class="project-tags">
-                    <span class="tag">PyTorch</span>
-                    <span class="tag">Transformers</span>
-                    <span class="tag">NLP</span>
+        <main>
+            <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white/50 p-8 rounded-lg border border-gold/20 h-48 flex flex-col justify-center items-center hover:shadow-md transition-all cursor-pointer">
+                        <span class="text-gold font-serif text-2xl font-bold mb-3">Project Alpha</span>
+                        <span class="text-base text-gray-secondary">LLM Agents</span>
+                    </div>
+                    <div class="bg-white/50 p-8 rounded-lg border border-gold/20 h-48 flex flex-col justify-center items-center hover:shadow-md transition-all cursor-pointer">
+                        <span class="text-gold font-serif text-2xl font-bold mb-3">Project Beta</span>
+                        <span class="text-base text-gray-secondary">Computer Vision</span>
+                    </div>
+                    <div class="bg-white/50 p-8 rounded-lg border border-gold/20 h-48 flex flex-col justify-center items-center hover:shadow-md transition-all cursor-pointer">
+                        <span class="text-gold font-serif text-2xl font-bold mb-3">Project Gamma</span>
+                        <span class="text-base text-gray-secondary">Audio Processing</span>
+                    </div>
+                    <div class="bg-white/50 p-8 rounded-lg border border-gold/20 h-48 flex flex-col justify-center items-center hover:shadow-md transition-all cursor-pointer">
+                        <span class="text-gold font-serif text-2xl font-bold mb-3">Project Delta</span>
+                        <span class="text-base text-gray-secondary">Reinforcement Learning</span>
+                    </div>
                 </div>
-                <div class="project-links">
-                    <a href="https://github.com/goktugguvercin/project-name" class="project-link" target="_blank">GitHub</a>
-                    <a href="#" class="project-link">Paper</a>
-                </div>
-            </article>
-
-            <!-- Example Project 2 -->
-            <article class="project-card">
-                <h2 class="project-title">Audio Classification with Deep Learning</h2>
-                <p class="project-description">
-                    Deep learning models for audio classification tasks, exploring different architectures 
-                    and preprocessing techniques for spectrograms and raw audio signals.
-                </p>
-                <div class="project-tags">
-                    <span class="tag">Audio Processing</span>
-                    <span class="tag">Deep Learning</span>
-                    <span class="tag">CNN</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/goktugguvercin/project-name" class="project-link" target="_blank">GitHub</a>
-                </div>
-            </article>
-
-            <!-- Example Project 3 -->
-            <article class="project-card">
-                <h2 class="project-title">Computer Vision Toolkit</h2>
-                <p class="project-description">
-                    A collection of computer vision algorithms and tools for image processing, 
-                    object detection, and segmentation tasks.
-                </p>
-                <div class="project-tags">
-                    <span class="tag">Computer Vision</span>
-                    <span class="tag">OpenCV</span>
-                    <span class="tag">Python</span>
-                </div>
-                <div class="project-links">
-                    <a href="https://github.com/goktugguvercin/project-name" class="project-link" target="_blank">GitHub</a>
-                    <a href="#" class="project-link">Demo</a>
-                </div>
-            </article>
-
-            <!-- Uncomment this if you want to show "coming soon" message instead -->
-            <!-- <div class="coming-soon">
-                <p>Projects coming soon! Check back later.</p>
-            </div> -->
-        </div>
+            </section>
+        </main>
+        
+        <footer class="mt-20 text-center text-sm text-gray-secondary font-serif opacity-70">
+            <p>© 2025 Goktug Guvercin. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 </html>

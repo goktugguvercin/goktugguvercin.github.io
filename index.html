@@ -52,6 +52,48 @@
         /* Utility to hide sections */
         .hidden-section { display: none; }
         
+        /* Blog card with gradient background */
+        .blog-card-gradient {
+            background: linear-gradient(135deg, #faf7f2 0%, #e8dcc8 100%);
+            border: 3px solid #2c2c2c;
+            border-radius: 24px;
+            padding: 2.5rem 2rem;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-card-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #d4a373 0%, #c4935e 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+        }
+
+        .blog-card-gradient:hover::before {
+            opacity: 0.15;
+        }
+
+        .blog-card-gradient:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+            border-color: #d4a373;
+        }
+        
         .pill {
             background-color: transparent;
             border: 1px solid #d4a373;
@@ -93,18 +135,18 @@
 
     <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gold/30 py-4">
         <div class="max-w-[900px] mx-auto px-8 flex justify-center gap-10">
-            <button onclick="switchTab('about')" id="nav-about" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+            <a href="index-tailwind-elegant.html" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
                 About
                 <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-full transition-all duration-300"></span>
-            </button>
-            <button onclick="switchTab('projects')" id="nav-projects" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+            </a>
+            <a href="projects-tailwind.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
                 Projects
                 <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
-            </button>
-            <button onclick="switchTab('blog')" id="nav-blog" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+            </a>
+            <a href="blog-tailwind.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
                 Blog
                 <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
-            </button>
+            </a>
         </div>
     </nav>
 
@@ -121,17 +163,14 @@
         </header>
 
         <main id="content-area">
-
-            <div id="page-about" class="fade-in">
-                
-                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10 transition-transform duration-300 hover:-translate-y-0.5">
-                    <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Philosophy & Approach</h2>
-                    <div class="text-dark/90 leading-relaxed text-lg space-y-6">
-                        <p>I am a Machine Learning Scientist specializing in Language Modeling, Agentic AI, and Computer Vision. I view these fields not as separate disciplines, but as integral, interconnected components of intelligence to build cognitive thinking systems.</p>
-                        <p>From a human perspective, the world is sensed and interpreted through sight, sound, and interaction. We then reason through this multimodal experience, draw conclusions, and compress it into language to communicate.</p>
-                        <p>That is why I prefer to work across multiple domains and combine them, specifically pushing the state of the art through research and publications, while also engineering end-to-end, production-ready AI solutions.</p>
-                    </div>
-                </section>
+            <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10 transition-transform duration-300 hover:-translate-y-0.5">
+                <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Philosophy & Approach</h2>
+                <div class="text-dark/90 leading-relaxed text-lg space-y-6">
+                    <p>I am a Machine Learning Scientist specializing in Language Modeling, Agentic AI, and Computer Vision. I view these fields not as separate disciplines, but as integral, interconnected components of intelligence to build cognitive thinking systems.</p>
+                    <p>From a human perspective, the world is sensed and interpreted through sight, sound, and interaction. We then reason through this multimodal experience, draw conclusions, and compress it into language to communicate.</p>
+                    <p>That is why I prefer to work across multiple domains and combine them, specifically pushing the state of the art through research and publications, while also engineering end-to-end, production-ready AI solutions.</p>
+                </div>
+            </section>
 
                 <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10 transition-transform duration-300 hover:-translate-y-0.5">
                     <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Expertise</h2>
@@ -205,59 +244,16 @@
                 </section>
 
                 <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10 text-center">
-                    <h2 class="font-serif text-2xl font-bold mb-4">Contact</h2>
-                    <p class="mb-6 text-lg">Feel free to reach out for collaborations, discussions, or just to connect!</p>
-                    <div class="flex flex-wrap justify-center gap-8 text-lg font-medium">
-                        <a href="mailto:your.email@example.com" class="link-hover">Email</a>
-                        <a href="https://github.com/goktugguvercin" class="link-hover" target="_blank">GitHub</a>
-                        <a href="#" class="link-hover" target="_blank">Google Scholar</a>
-                        <a href="#" class="link-hover" target="_blank">LinkedIn</a>
-                        <a href="#" class="link-hover" target="_blank">X (Twitter)</a>
-                    </div>
-                </section>
-            </div>
-
-            <div id="page-projects" class="hidden-section fade-in">
-                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10">
-                    <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Projects</h2>
-                    <p class="italic text-gray-secondary mb-8">Selected works in Deep Learning and NLP.</p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="bg-white/50 p-6 rounded-lg border border-gold/20 h-40 flex flex-col justify-center items-center hover:shadow-md transition-all">
-                            <span class="text-gold font-serif text-xl font-bold">Project Alpha</span>
-                            <span class="text-sm text-gray-secondary mt-2">LLM Agents</span>
-                        </div>
-                        <div class="bg-white/50 p-6 rounded-lg border border-gold/20 h-40 flex flex-col justify-center items-center hover:shadow-md transition-all">
-                            <span class="text-gold font-serif text-xl font-bold">Project Beta</span>
-                            <span class="text-sm text-gray-secondary mt-2">Computer Vision</span>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <div id="page-blog" class="hidden-section fade-in">
-                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10">
-                    <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Latest Thoughts</h2>
-                    <p class="italic text-gray-secondary mb-8">Technical articles and research notes.</p>
-                    
-                    <div class="space-y-8">
-                        <div class="border-b border-gold/20 pb-6">
-                            <h3 class="font-serif text-xl font-bold text-dark mb-2">The Future of Multimodal Agents</h3>
-                            <span class="text-xs text-gold uppercase tracking-wider font-bold">October 2024</span>
-                            <p class="mt-3 text-dark/80 leading-relaxed">
-                                Exploring the intersection of vision and language models in autonomous systems. How do we move from text-only reasoning to true spatial awareness?
-                            </p>
-                        </div>
-                        <div class="border-b border-gold/20 pb-6">
-                            <h3 class="font-serif text-xl font-bold text-dark mb-2">Optimizing RAG Pipelines</h3>
-                            <span class="text-xs text-gold uppercase tracking-wider font-bold">September 2024</span>
-                            <p class="mt-3 text-dark/80 leading-relaxed">
-                                A deep dive into re-ranking strategies and vector database indexing for higher accuracy retrieval in specialized domains.
-                            </p>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
+                <h2 class="font-serif text-2xl font-bold mb-4">Contact</h2>
+                <p class="mb-6 text-lg">Feel free to reach out for collaborations, discussions, or just to connect!</p>
+                <div class="flex flex-wrap justify-center gap-8 text-lg font-medium">
+                    <a href="mailto:your.email@example.com" class="link-hover">Email</a>
+                    <a href="https://github.com/goktugguvercin" class="link-hover" target="_blank">GitHub</a>
+                    <a href="#" class="link-hover" target="_blank">Google Scholar</a>
+                    <a href="#" class="link-hover" target="_blank">LinkedIn</a>
+                    <a href="#" class="link-hover" target="_blank">X (Twitter)</a>
+                </div>
+            </section>
         </main>
         
         <footer class="mt-16 text-center text-sm text-gray-secondary font-serif opacity-70">
@@ -266,42 +262,7 @@
     </div>
 
     <script>
-        // --- 1. Tab Switching Logic ---
-        function switchTab(tabId) {
-            // Hide all pages
-            ['about', 'projects', 'blog'].forEach(id => {
-                document.getElementById(`page-${id}`).classList.add('hidden-section');
-                
-                // Reset Nav Styles
-                const navBtn = document.getElementById(`nav-${id}`);
-                const underline = navBtn.querySelector('span');
-                
-                navBtn.classList.remove('text-gold');
-                navBtn.classList.add('text-gray-primary');
-                underline.classList.remove('w-full');
-                underline.classList.add('w-0');
-            });
-
-            // Show selected page
-            const activePage = document.getElementById(`page-${tabId}`);
-            activePage.classList.remove('hidden-section');
-            
-            // Re-trigger fade animation
-            activePage.classList.remove('fade-in');
-            void activePage.offsetWidth; // trigger reflow
-            activePage.classList.add('fade-in');
-
-            // Set Active Nav Styles
-            const activeNav = document.getElementById(`nav-${tabId}`);
-            const activeUnderline = activeNav.querySelector('span');
-            
-            activeNav.classList.remove('text-gray-primary');
-            activeNav.classList.add('text-gold');
-            activeUnderline.classList.remove('w-0');
-            activeUnderline.classList.add('w-full');
-        }
-
-        // --- 2. Accordion Logic ---
+        // Accordion Logic
         function toggleAccordion(contentId, arrowId) {
             const content = document.getElementById(contentId);
             const arrow = document.getElementById(arrowId);
@@ -309,7 +270,7 @@
             if (content.classList.contains('hidden')) {
                 // Open
                 content.classList.remove('hidden');
-                content.classList.add('flex'); // Ensure it uses flex display
+                content.classList.add('flex');
                 arrow.classList.remove('-rotate-90');
                 arrow.classList.add('rotate-0');
             } else {
