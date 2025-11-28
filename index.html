@@ -130,10 +130,23 @@
         .link-hover:hover { color: #d4a373; }
         .link-hover:hover::after { width: 100%; }
         
-        /* Make card borders more visible - override inline classes */
+        /* Make section borders more visible - override inline classes */
         main section {
             border: 1px solid rgba(212, 163, 115, 0.7) !important;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
+        }
+        
+        /* Smooth accordion animation */
+        .accordion-content {
+            max-height: 500px;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 1;
+        }
+        
+        .accordion-content.collapsed {
+            max-height: 0;
+            opacity: 0;
         }
     </style>
 </head>
@@ -161,7 +174,7 @@
         <header class="text-center px-8 pt-4 pb-12">
             <div class="relative inline-block mb-6 group">
                 <div class="w-[140px] h-[140px] rounded-full overflow-hidden border-4 border-white/50 shadow-[0_8px_24px_rgba(212,163,115,0.2)] bg-[#e0d5c8] transition-transform duration-400 ease-out group-hover:scale-105">
-                    <img src="https://via.placeholder.com/300x300/d4a373/ffffff?text=GG" alt="Goktug Guvercin" class="w-full h-full object-cover">
+                    <img src="images/profile.jpg" alt="Goktug Guvercin" class="w-full h-full object-cover">
                 </div>
             </div>
             <h1 class="m-0 font-serif text-4xl md:text-6xl font-bold tracking-tight text-[#1a1a1a]">Goktug Guvercin</h1>
@@ -186,7 +199,7 @@
                             <span>Paradigms and Methodologies</span>
                             <span id="arrow-1" class="text-sm text-gold transition-transform duration-300 -rotate-90">▼</span>
                         </button>
-                        <div id="acc-1" class="hidden flex-wrap gap-3 overflow-hidden transition-all">
+                        <div id="acc-1" class="accordion-content collapsed flex-wrap gap-3">
                             <span class="pill">Supervised Learning</span>
                             <span class="pill">Self-Supervised Learning</span>
                             <span class="pill">Contrastive Learning</span>
@@ -201,7 +214,7 @@
                             <span>Training and Alignment</span>
                             <span id="arrow-2" class="text-sm text-gold transition-transform duration-300 -rotate-90">▼</span>
                         </button>
-                        <div id="acc-2" class="hidden flex-wrap gap-3 overflow-hidden transition-all">
+                        <div id="acc-2" class="accordion-content collapsed flex-wrap gap-3">
                             <span class="pill">PEFT (LoRA, QLoRA)</span>
                             <span class="pill">DPO</span>
                             <span class="pill">RLHF</span>
@@ -215,7 +228,7 @@
                             <span>Generative and Agentic AI</span>
                             <span id="arrow-3" class="text-sm text-gold transition-transform duration-300 -rotate-90">▼</span>
                         </button>
-                        <div id="acc-3" class="hidden flex-wrap gap-3 overflow-hidden transition-all">
+                        <div id="acc-3" class="accordion-content collapsed flex-wrap gap-3">
                             <span class="pill">Attention Systems</span>
                             <span class="pill">LLMs</span>
                             <span class="pill">RAG</span>
@@ -249,15 +262,15 @@
                     </div>
                 </section>
 
-                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10 text-center">
-                <h2 class="font-serif text-2xl font-bold mb-4">Contact</h2>
-                <p class="mb-6 text-lg">Feel free to reach out for collaborations, discussions, or just to connect!</p>
-                <div class="flex flex-wrap justify-center gap-8 text-lg font-medium">
+                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10">
+                <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Contact</h2>
+                <p class="text-dark/90 leading-relaxed text-lg mb-8">Feel free to reach out for collaborations, discussions, or just to connect!</p>
+                <div class="flex flex-wrap gap-8 text-lg font-medium">
                     <a href="mailto:your.email@example.com" class="link-hover">Email</a>
                     <a href="https://github.com/goktugguvercin" class="link-hover" target="_blank">GitHub</a>
                     <a href="#" class="link-hover" target="_blank">Google Scholar</a>
                     <a href="#" class="link-hover" target="_blank">LinkedIn</a>
-                    <a href="#" class="link-hover" target="_blank">X (Twitter)</a>
+                    <a href="#" class="link-hover" target="_blank">Twitter</a>
                 </div>
             </section>
         </main>
@@ -268,21 +281,20 @@
     </div>
 
     <script>
-        // Accordion Logic
+        // Accordion Logic with smooth animation
         function toggleAccordion(contentId, arrowId) {
             const content = document.getElementById(contentId);
             const arrow = document.getElementById(arrowId);
             
-            if (content.classList.contains('hidden')) {
+            if (content.classList.contains('collapsed')) {
                 // Open
-                content.classList.remove('hidden');
+                content.classList.remove('collapsed');
                 content.classList.add('flex');
                 arrow.classList.remove('-rotate-90');
                 arrow.classList.add('rotate-0');
             } else {
                 // Close
-                content.classList.add('hidden');
-                content.classList.remove('flex');
+                content.classList.add('collapsed');
                 arrow.classList.add('-rotate-90');
                 arrow.classList.remove('rotate-0');
             }
