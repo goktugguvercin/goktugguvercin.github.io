@@ -129,13 +129,19 @@
         }
         .link-hover:hover { color: #d4a373; }
         .link-hover:hover::after { width: 100%; }
+        
+        /* Make card borders more visible - override inline classes */
+        main section {
+            border: 1px solid rgba(212, 163, 115, 0.7) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
+        }
     </style>
 </head>
 <body class="bg-cream bg-warm-radial bg-fixed min-h-screen text-dark font-sans antialiased pb-16">
 
     <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gold/30 py-4">
         <div class="max-w-[900px] mx-auto px-8 flex justify-center gap-10">
-            <a href="index-tailwind-elegant.html" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+            <a href="index.html" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
                 About
                 <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-full transition-all duration-300"></span>
             </a>
