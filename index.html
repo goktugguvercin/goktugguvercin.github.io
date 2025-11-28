@@ -3,338 +3,322 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Goktug Guvercin - Machine Learning Scientist specializing in deep learning, NLP, computer vision, and audio processing. Research and blog on AI and machine learning.">
-    <meta name="keywords" content="Goktug Guvercin, Machine Learning, Deep Learning, NLP, Computer Vision, Audio Processing, AI Research">
-    <meta name="author" content="Goktug Guvercin">
+    <meta name="description" content="Goktug Guvercin - Machine Learning Scientist">
     <title>Goktug Guvercin - Machine Learning Scientist</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#f5ebe0',
+              gold: '#d4a373',
+              dark: '#2c2c2c',
+              sand: '#ede5d8',
+              gray: { primary: '#5a5a5a', secondary: '#666666' }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            backgroundImage: {
+              'warm-radial': 'radial-gradient(circle at 15% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 25%), radial-gradient(circle at 85% 30%, rgba(26, 115, 232, 0.05) 0%, transparent 25%)',
+            }
+          }
+        }
+      }
+    </script>
+
     <style>
-        body {
-            background-color: #f5ebe0;
-            margin: 0;
-            min-height: 100vh;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        /* Smooth scrolling and scrollbar styling */
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5ebe0; }
+        ::-webkit-scrollbar-thumb { background: #d4a373; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c29365; }
+
+        /* Animation for page switching */
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .navigation {
-            background-color: #d4a373;
-            padding: 1rem 0;
-            width: 100%;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            padding: 0 2rem;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            color: #2c2c2c;
-            font-size: 1.1rem;
-            font-weight: 500;
-            padding: 0.5rem 1.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+        /* Utility to hide sections */
+        .hidden-section { display: none; }
+        
+        .pill {
             background-color: transparent;
-        }
-
-        .nav-item:hover {
-            background-color: #c4935e;
-            transform: translateY(-2px);
-        }
-
-        .nav-item.active {
-            background-color: #1a73e8;
-            color: white;
-        }
-
-        .content-wrapper {
-            margin-top: 80px;
-            width: 100%;
-        }
-
-        .site-header {
-            padding: 3rem 2rem 2rem;
-            text-align: center;
-        }
-
-        .site-title {
-            margin: 0;
-            font-size: 3rem;
-            color: rgb(0, 0, 0);
-        }
-
-        .site-subtitle {
-            margin: 0.5rem 0 0 0;
-            font-size: 1.4rem;
-            font-style: italic;
-            color: dimgray;
-        }
-
-        .about-container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        .about-section {
-            background-color: #ede5d8;
-            padding: 2.5rem;
-            border-radius: 16px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
-        }
-
-        .about-section h2 {
-            color: #1a1a1a;
-            margin-top: 0;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-
-        .about-section p {
-            color: #333;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        .interest-category {
-            margin-bottom: 2.5rem;
-        }
-
-        .interest-category:last-child {
-            margin-bottom: 0;
-        }
-
-        .category-title {
-            color: #1a1a1a;
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin: 0 0 1rem 0;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid #d4a373;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            cursor: pointer;
-            user-select: none;
-            transition: color 0.3s ease;
-        }
-
-        .category-title:hover {
-            color: #d4a373;
-        }
-
-        .category-icon {
-            transition: transform 0.3s ease;
-            font-size: 1rem;
-            color: #d4a373;
-        }
-
-        .interest-category.collapsed .category-icon {
-            transform: rotate(-90deg);
-        }
-
-        .interests-list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-            margin-top: 1rem;
-            max-height: 1000px;
-            overflow: hidden;
-            transition: max-height 0.4s ease, opacity 0.3s ease;
-            opacity: 1;
-        }
-
-        .interest-category.collapsed .interests-list {
-            max-height: 0;
-            opacity: 0;
-            margin-top: 0;
-        }
-
-        @media (max-width: 968px) {
-            .interests-list {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 640px) {
-            .interests-list {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .interest-item {
-            background-color: #d4a373;
-            padding: 0.85rem 1rem;
-            border-radius: 8px;
-            text-align: center;
+            border: 1px solid #d4a373;
+            color: #8c6b4f;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
             font-weight: 500;
-            font-size: 0.95rem;
-            color: white;
-            transition: transform 0.2s ease, background-color 0.2s ease;
             cursor: default;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: all 0.2s ease;
         }
-
-        .interest-item:hover {
-            transform: translateY(-3px);
-            background-color: #c4935e;
+        .pill:hover {
+            background-color: #d4a373;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-link {
-            color: #1a73e8;
+        .link-hover {
+            color: #2c2c2c;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            position: relative;
+            transition: color 0.3s;
         }
-
-        .contact-link:hover {
-            color: #0d47a1;
-            text-decoration: underline;
+        .link-hover::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: #d4a373;
+            transition: width 0.3s ease;
         }
+        .link-hover:hover { color: #d4a373; }
+        .link-hover:hover::after { width: 100%; }
     </style>
 </head>
-<body>
-    <nav class="navigation">
-        <div class="nav-container">
-            <a href="index.html" class="nav-item active">About</a>
-            <a href="projects.html" class="nav-item">Projects</a>
-            <a href="blog.html" class="nav-item">Blog</a>
+<body class="bg-cream bg-warm-radial bg-fixed min-h-screen text-dark font-sans antialiased pb-16">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gold/30 py-4">
+        <div class="max-w-[900px] mx-auto px-8 flex justify-center gap-10">
+            <button onclick="switchTab('about')" id="nav-about" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                About
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-full transition-all duration-300"></span>
+            </button>
+            <button onclick="switchTab('projects')" id="nav-projects" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Projects
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </button>
+            <button onclick="switchTab('blog')" id="nav-blog" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Blog
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </button>
         </div>
     </nav>
-    
-    <div class="content-wrapper">
-        <header class="site-header">
-            <h1 class="site-title">Goktug Guvercin</h1>
-            <p class="site-subtitle">Machine Learning Scientist</p>
+
+    <div class="mt-[120px] w-full max-w-[850px] mx-auto px-6 md:px-8">
+        
+        <header class="text-center px-8 pt-4 pb-12">
+            <div class="relative inline-block mb-6 group">
+                <div class="w-[140px] h-[140px] rounded-full overflow-hidden border-4 border-white/50 shadow-[0_8px_24px_rgba(212,163,115,0.2)] bg-[#e0d5c8] transition-transform duration-400 ease-out group-hover:scale-105">
+                    <img src="https://via.placeholder.com/300x300/d4a373/ffffff?text=GG" alt="Goktug Guvercin" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <h1 class="m-0 font-serif text-4xl md:text-6xl font-bold tracking-tight text-[#1a1a1a]">Goktug Guvercin</h1>
+            <p class="mt-4 font-sans text-lg tracking-widest uppercase text-gray-secondary font-normal">Machine Learning Scientist</p>
         </header>
 
-        <div class="about-container">
-            <section class="about-section">
-                <h2>Philosophy & Approach</h2>
-                <p>
-                    I am a Machine Learning Scientist specializing in Language Modeling, Agentic AI, and Computer Vision. 
-                    I view these fields not as separate disciplines, but as integral, interconnected components of intelligence to build cognitive thinking systems.
-                </p>
-                
-                <p>
-                    From human perspective, the world is sensed and interpreted through sight, sound, and interaction. 
-                    We then reason through this multimodal experience, draw some conclusions and compress it into the language to communicate or into the decisions to take some actions. 
-                    This necessitates multimodality with relational and perceptive modeling, that goes beyond text generation alone. 
-                    That is why, I prefer to work across multiple domains and combine them, specifically pushing the state of the art through research and publications, 
-                    while also engineering end-to-end, production-ready AI solutions that bridge the gap between theory and scalable products.
-                </p>
+        <main id="content-area">
 
-                <p>
-                    Currently, I work at Pleia AI, where I engineer generative and agentic systems that orchestrate LLM tools with multimodal reasoning for personalized healthcare. 
-                    Previously, as a Research Scientist at AstraZeneca, I developed novel self-supervised learning paradigms for the investigation of EGFR and CMET effect on cancer progression.
-                </p>
-            </section>
-
-            <section class="about-section">
-                <h2>Expertise</h2>
+            <div id="page-about" class="fade-in">
                 
-                <div class="interest-category collapsed">
-                    <h3 class="category-title" onclick="toggleCategory(this)">
-                        <span>Paradigms and Methodologies</span>
-                        <span class="category-icon">▼</span>
-                    </h3>
-                    <div class="interests-list">
-                        <div class="interest-item">Supervised Learning</div>
-                        <div class="interest-item">Self-Supervised Learning</div>
-                        <div class="interest-item">Contrastive Learning</div>
-                        <div class="interest-item">Masked Language and Image Modeling</div>
-                        <div class="interest-item">Generative Pre-training</div>
-                        <div class="interest-item">Reinforcement Learning</div>
-                        <div class="interest-item">Explainable AI</div>
-                        <div class="interest-item">Multimodality</div>
+                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10 transition-transform duration-300 hover:-translate-y-0.5">
+                    <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Philosophy & Approach</h2>
+                    <div class="text-dark/90 leading-relaxed text-lg space-y-6">
+                        <p>I am a Machine Learning Scientist specializing in Language Modeling, Agentic AI, and Computer Vision. I view these fields not as separate disciplines, but as integral, interconnected components of intelligence to build cognitive thinking systems.</p>
+                        <p>From a human perspective, the world is sensed and interpreted through sight, sound, and interaction. We then reason through this multimodal experience, draw conclusions, and compress it into language to communicate.</p>
+                        <p>That is why I prefer to work across multiple domains and combine them, specifically pushing the state of the art through research and publications, while also engineering end-to-end, production-ready AI solutions.</p>
                     </div>
-                </div>
+                </section>
 
-                <div class="interest-category collapsed">
-                    <h3 class="category-title" onclick="toggleCategory(this)">
-                        <span>Training and Alignment</span>
-                        <span class="category-icon">▼</span>
-                    </h3>
-                    <div class="interests-list">
-                        <div class="interest-item">Parameter Efficient Finetuning (LoRA, QLoRA)</div>
-                        <div class="interest-item">Direct Preference Optimization (DPO)</div>
-                        <div class="interest-item">Reinforcement Learning from Human Feedback (RLHF)</div>
-                        <div class="interest-item">Reward Modeling</div>
-                        <div class="interest-item">Hallucination Mitigation</div>
-                        <div class="interest-item">Adaptable Intelligence</div>
+                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10 transition-transform duration-300 hover:-translate-y-0.5">
+                    <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Expertise</h2>
+                    
+                    <div class="mb-8">
+                        <button onclick="toggleAccordion('acc-1', 'arrow-1')" class="flex items-center gap-3 font-serif text-dark text-xl md:text-2xl font-semibold mb-4 cursor-pointer hover:text-gold focus:outline-none w-full text-left">
+                            <span>Paradigms and Methodologies</span>
+                            <span id="arrow-1" class="text-sm text-gold transition-transform duration-300 -rotate-90">▼</span>
+                        </button>
+                        <div id="acc-1" class="hidden flex-wrap gap-3 overflow-hidden transition-all">
+                            <span class="pill">Supervised Learning</span>
+                            <span class="pill">Self-Supervised Learning</span>
+                            <span class="pill">Contrastive Learning</span>
+                            <span class="pill">Masked Language Modeling</span>
+                            <span class="pill">Reinforcement Learning</span>
+                            <span class="pill">Multimodality</span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="interest-category collapsed">
-                    <h3 class="category-title" onclick="toggleCategory(this)">
-                        <span>Generative and Agentic AI</span>
-                        <span class="category-icon">▼</span>
-                    </h3>
-                    <div class="interests-list">
-                        <div class="interest-item">Attention Systems</div>
-                        <div class="interest-item">Large Language Models</div>
-                        <div class="interest-item">Retrieval Augmented Generation (RAG)</div>
-                        <div class="interest-item">Embeddings and ReRanking</div>
-                        <div class="interest-item">Vector Databases</div>
-                        <div class="interest-item">Semantic Search</div>
-                        <div class="interest-item">Chain of Thoughts</div>
-                        <div class="interest-item">Agent Orchestration</div>
+                    <div class="mb-8">
+                        <button onclick="toggleAccordion('acc-2', 'arrow-2')" class="flex items-center gap-3 font-serif text-dark text-xl md:text-2xl font-semibold mb-4 cursor-pointer hover:text-gold focus:outline-none w-full text-left">
+                            <span>Training and Alignment</span>
+                            <span id="arrow-2" class="text-sm text-gold transition-transform duration-300 -rotate-90">▼</span>
+                        </button>
+                        <div id="acc-2" class="hidden flex-wrap gap-3 overflow-hidden transition-all">
+                            <span class="pill">PEFT (LoRA, QLoRA)</span>
+                            <span class="pill">DPO</span>
+                            <span class="pill">RLHF</span>
+                            <span class="pill">Reward Modeling</span>
+                            <span class="pill">Hallucination Mitigation</span>
+                        </div>
                     </div>
-                </div>
-            </section>
 
-            <section class="about-section">
-                <h2>Education</h2>
-                <p><strong>Imperial College London</strong> <em>[Academic Research and M.Sc. Thesis]</em><br>
-                <strong>Advisor:</strong> Assoc. Prof. Dr. Islem Rekik</p>
-                
-                <p style="margin-top: 1.5rem;"><strong>Technical University of Munich</strong> <em>[M.Sc. Informatics]</em><br>
-                <strong>Advisor:</strong> Prof. Dr. Nassir Navab<br>
-                <strong>GPA:</strong> 1.7 / 1.0</p>
-                
-                <p style="margin-top: 1.5rem;"><strong>Istanbul Technical University</strong> <em>[B.Sc. Computer Science]</em><br>
-                <strong>Advisor:</strong> Assoc. Prof. Sanem Sarıel<br>
-                <strong>GPA:</strong> 3.45 / 4.00</p>
-            </section>
+                     <div class="mb-8">
+                        <button onclick="toggleAccordion('acc-3', 'arrow-3')" class="flex items-center gap-3 font-serif text-dark text-xl md:text-2xl font-semibold mb-4 cursor-pointer hover:text-gold focus:outline-none w-full text-left">
+                            <span>Generative and Agentic AI</span>
+                            <span id="arrow-3" class="text-sm text-gold transition-transform duration-300 -rotate-90">▼</span>
+                        </button>
+                        <div id="acc-3" class="hidden flex-wrap gap-3 overflow-hidden transition-all">
+                            <span class="pill">Attention Systems</span>
+                            <span class="pill">LLMs</span>
+                            <span class="pill">RAG</span>
+                            <span class="pill">Vector Databases</span>
+                            <span class="pill">Semantic Search</span>
+                            <span class="pill">Chain of Thoughts</span>
+                            <span class="pill">Agent Orchestration</span>
+                        </div>
+                    </div>
+                </section>
 
-            <section class="about-section">
-                <h2>Contact</h2>
-                <p>Feel free to reach out for collaborations, discussions, or just to connect!</p>
-                <div class="contact-links">
-                    <a href="mailto:your.email@example.com" class="contact-link">Email</a>
-                    <a href="https://github.com/goktugguvercin" class="contact-link" target="_blank">GitHub</a>
-                    <a href="https://scholar.google.com/your-profile" class="contact-link" target="_blank">Google Scholar</a>
-                    <a href="https://linkedin.com/in/your-profile" class="contact-link" target="_blank">LinkedIn</a>
-                    <a href="https://twitter.com/your-handle" class="contact-link" target="_blank">Twitter</a>
-                </div>
-            </section>
-        </div>
+                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10 transition-transform duration-300 hover:-translate-y-0.5">
+                    <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Education</h2>
+                    
+                    <div class="mb-8 last:mb-0">
+                        <div class="text-xl font-semibold text-[#1a1a1a]">Imperial College London</div>
+                        <div class="font-serif italic text-gray-secondary mb-2">Academic Research and M.Sc. Thesis</div>
+                        <div class="text-base opacity-90 text-dark"><strong>Advisor:</strong> Assoc. Prof. Dr. Islem Rekik</div>
+                    </div>
+
+                    <div class="mb-8 last:mb-0">
+                        <div class="text-xl font-semibold text-[#1a1a1a]">Technical University of Munich</div>
+                        <div class="font-serif italic text-gray-secondary mb-2">M.Sc. Informatics</div>
+                        <div class="text-base opacity-90 text-dark"><strong>Advisor:</strong> Prof. Dr. Nassir Navab <br> <strong>GPA:</strong> 1.7 / 1.0</div>
+                    </div>
+
+                    <div class="mb-8 last:mb-0">
+                        <div class="text-xl font-semibold text-[#1a1a1a]">Istanbul Technical University</div>
+                        <div class="font-serif italic text-gray-secondary mb-2">B.Sc. Computer Science</div>
+                        <div class="text-base opacity-90 text-dark"><strong>Advisor:</strong> Assoc. Prof. Sanem Sarıel <br> <strong>GPA:</strong> 3.45 / 4.00</div>
+                    </div>
+                </section>
+
+                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10 text-center">
+                    <h2 class="font-serif text-2xl font-bold mb-4">Contact</h2>
+                    <p class="mb-6 text-lg">Feel free to reach out for collaborations, discussions, or just to connect!</p>
+                    <div class="flex flex-wrap justify-center gap-8 text-lg font-medium">
+                        <a href="mailto:your.email@example.com" class="link-hover">Email</a>
+                        <a href="https://github.com/goktugguvercin" class="link-hover" target="_blank">GitHub</a>
+                        <a href="#" class="link-hover" target="_blank">Google Scholar</a>
+                        <a href="#" class="link-hover" target="_blank">LinkedIn</a>
+                        <a href="#" class="link-hover" target="_blank">X (Twitter)</a>
+                    </div>
+                </section>
+            </div>
+
+            <div id="page-projects" class="hidden-section fade-in">
+                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10">
+                    <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Projects</h2>
+                    <p class="italic text-gray-secondary mb-8">Selected works in Deep Learning and NLP.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-white/50 p-6 rounded-lg border border-gold/20 h-40 flex flex-col justify-center items-center hover:shadow-md transition-all">
+                            <span class="text-gold font-serif text-xl font-bold">Project Alpha</span>
+                            <span class="text-sm text-gray-secondary mt-2">LLM Agents</span>
+                        </div>
+                        <div class="bg-white/50 p-6 rounded-lg border border-gold/20 h-40 flex flex-col justify-center items-center hover:shadow-md transition-all">
+                            <span class="text-gold font-serif text-xl font-bold">Project Beta</span>
+                            <span class="text-sm text-gray-secondary mt-2">Computer Vision</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <div id="page-blog" class="hidden-section fade-in">
+                <section class="bg-sand/90 backdrop-blur-xl border border-white/60 p-8 md:p-12 rounded-[20px] shadow-sm mb-10">
+                    <h2 class="font-serif text-dark text-3xl mb-6 pb-4 border-b border-gold/30 inline-block">Latest Thoughts</h2>
+                    <p class="italic text-gray-secondary mb-8">Technical articles and research notes.</p>
+                    
+                    <div class="space-y-8">
+                        <div class="border-b border-gold/20 pb-6">
+                            <h3 class="font-serif text-xl font-bold text-dark mb-2">The Future of Multimodal Agents</h3>
+                            <span class="text-xs text-gold uppercase tracking-wider font-bold">October 2024</span>
+                            <p class="mt-3 text-dark/80 leading-relaxed">
+                                Exploring the intersection of vision and language models in autonomous systems. How do we move from text-only reasoning to true spatial awareness?
+                            </p>
+                        </div>
+                        <div class="border-b border-gold/20 pb-6">
+                            <h3 class="font-serif text-xl font-bold text-dark mb-2">Optimizing RAG Pipelines</h3>
+                            <span class="text-xs text-gold uppercase tracking-wider font-bold">September 2024</span>
+                            <p class="mt-3 text-dark/80 leading-relaxed">
+                                A deep dive into re-ranking strategies and vector database indexing for higher accuracy retrieval in specialized domains.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+        
+        <footer class="mt-16 text-center text-sm text-gray-secondary font-serif opacity-70">
+            <p>© 2025 Goktug Guvercin. All rights reserved.</p>
+        </footer>
     </div>
 
     <script>
-        function toggleCategory(titleElement) {
-            const category = titleElement.parentElement;
-            category.classList.toggle('collapsed');
+        // --- 1. Tab Switching Logic ---
+        function switchTab(tabId) {
+            // Hide all pages
+            ['about', 'projects', 'blog'].forEach(id => {
+                document.getElementById(`page-${id}`).classList.add('hidden-section');
+                
+                // Reset Nav Styles
+                const navBtn = document.getElementById(`nav-${id}`);
+                const underline = navBtn.querySelector('span');
+                
+                navBtn.classList.remove('text-gold');
+                navBtn.classList.add('text-gray-primary');
+                underline.classList.remove('w-full');
+                underline.classList.add('w-0');
+            });
+
+            // Show selected page
+            const activePage = document.getElementById(`page-${tabId}`);
+            activePage.classList.remove('hidden-section');
+            
+            // Re-trigger fade animation
+            activePage.classList.remove('fade-in');
+            void activePage.offsetWidth; // trigger reflow
+            activePage.classList.add('fade-in');
+
+            // Set Active Nav Styles
+            const activeNav = document.getElementById(`nav-${tabId}`);
+            const activeUnderline = activeNav.querySelector('span');
+            
+            activeNav.classList.remove('text-gray-primary');
+            activeNav.classList.add('text-gold');
+            activeUnderline.classList.remove('w-0');
+            activeUnderline.classList.add('w-full');
+        }
+
+        // --- 2. Accordion Logic ---
+        function toggleAccordion(contentId, arrowId) {
+            const content = document.getElementById(contentId);
+            const arrow = document.getElementById(arrowId);
+            
+            if (content.classList.contains('hidden')) {
+                // Open
+                content.classList.remove('hidden');
+                content.classList.add('flex'); // Ensure it uses flex display
+                arrow.classList.remove('-rotate-90');
+                arrow.classList.add('rotate-0');
+            } else {
+                // Close
+                content.classList.add('hidden');
+                content.classList.remove('flex');
+                arrow.classList.add('-rotate-90');
+                arrow.classList.remove('rotate-0');
+            }
         }
     </script>
 </body>
