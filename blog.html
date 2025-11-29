@@ -87,6 +87,12 @@
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
             border-color: #d4a373;
         }
+        
+        /* Make section borders more visible - override inline classes */
+        main section {
+            border: 2px solid rgba(212, 163, 115, 0.7) !important;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12) !important;
+        }
     </style>
 </head>
 <body class="bg-cream bg-warm-radial bg-fixed min-h-screen text-dark font-sans antialiased pb-16">
@@ -132,37 +138,36 @@
                 id: 1,
                 title: "Transformers and Attention Mechanism (Soon ...)",
                 date: "Expected Date: December, 2025",
-                slug: "transformers-attention-mechanism"
+                slug: "#"
             },
             {
                 id: 2,
                 title: "Sampling and Frequency in Audio ML Models",
                 date: "November 13, 2025",
-                slug: "sampling-frequency-audio"
+                slug: "audio_sampling.html"
             },
             {
                 id: 3,
                 title: "...",
                 date: "...",
-                slug: "understanding-neural-networks"
+                slug: "#"
             },
             {
                 id: 4,
                 title: "...",
                 date: "...",
-                slug: "deep-learning-optimization"
+                slug: "#"
             },
             {
                 id: 5,
                 title: "...",
                 date: "...",
-                slug: "computer-vision-basics"
+                slug: "#"
             },
             {
                 id: 6,
                 title: "...",
-                date: "...",
-                slug: "reinforcement-learning"
+                date: "#"
             }
         ];
 
@@ -170,7 +175,7 @@
         
         blogPosts.forEach(post => {
             const card = document.createElement('a');
-            card.href = `blog-post.html?id=${post.slug}`;
+            card.href = post.slug;
             card.className = 'blog-card-gradient';
             
             card.innerHTML = `
