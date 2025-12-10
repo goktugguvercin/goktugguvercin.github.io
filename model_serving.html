@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Evolution of AI Model Serving - Goktug Guvercin</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="The Evolution of AI Model Serving">
+    <meta property="og:description" content="A deep dive into AI model serving frameworks, from Flask's limitations to FastAPI's async capabilities and LitServe's specialized AI inference architecture.">
+    <meta property="og:image" content="https://goktugguvercin.github.io/images/model_serving.jpg">
+    <meta property="og:url" content="https://goktugguvercin.github.io/model_serving.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Goktug Guvercin">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="The Evolution of AI Model Serving: Flask, FastAPI, and LitServe">
+    <meta name="twitter:description" content="A deep dive into AI model serving frameworks, from Flask's limitations to FastAPI's async capabilities and LitServe's specialized AI inference architecture.">
+    <meta name="twitter:image" content="https://goktugguvercin.github.io/images/model_serving.jpg">
+    <meta name="twitter:creator" content="@yourtwitterhandle">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#f5ebe0',
+              gold: '#d4a373',
+              dark: '#2c2c2c',
+              sand: '#ede5d8',
+              gray: { primary: '#5a5a5a', secondary: '#666666' }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            backgroundImage: {
+              'warm-radial': 'radial-gradient(circle at 15% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 25%), radial-gradient(circle at 85% 30%, rgba(26, 115, 232, 0.05) 0%, transparent 25%)',
+            }
+          }
+        }
+      }
+    </script>
+    
+    <style>
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5ebe0; }
+        ::-webkit-scrollbar-thumb { background: #d4a373; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c29365; }
+
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .post-content {
+            background: linear-gradient(135deg, #faf7f2 0%, #e8dcc8 100%);
+            border: 2px solid rgba(212, 163, 115, 0.7);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .post-content h2 {
+            color: #1a1a1a;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .post-content h3 {
+            color: #2c2c2c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .post-content h4 {
+            color: #2c2c2c;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .post-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .post-content code {
+            background-color: #e8e8e8;
+            color: #1a1a1a;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Courier New', 'Consolas', monospace;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .post-content pre {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .post-content pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        
+        .post-content ol {
+            list-style-type: decimal;
+        }
+
+        .post-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+            display: list-item;
+        }
+
+        .post-content strong {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .post-content em {
+            font-style: italic;
+        }
+
+        .post-content table {
+            width: 100%;
+            margin: 1.5rem 0;
+            border-collapse: collapse;
+        }
+
+        .post-content table th {
+            background-color: #d4a373;
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .post-content table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e8dcc8;
+        }
+
+        .post-content table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .back-link {
+            color: #2c2c2c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-link:hover {
+            color: #d4a373;
+        }
+
+        .tag {
+            background-color: transparent;
+            border: 1px solid #d4a373;
+            color: #8c6b4f;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: default;
+            transition: all 0.2s ease;
+        }
+        
+        .tag:hover {
+            background-color: #d4a373;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-cream bg-warm-radial bg-fixed min-h-screen text-dark font-sans antialiased pb-16">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gold/30 py-4">
+        <div class="max-w-[900px] mx-auto px-8 flex justify-center gap-10">
+            <a href="index-new.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                About
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="projects-new.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Projects
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="blog-new.html" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Blog
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-full transition-all duration-300"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="mt-[120px] w-full max-w-[900px] mx-auto px-6 md:px-8 fade-in">
+        
+        <a href="blog-new.html" class="back-link mb-8 inline-block">
+            <span>←</span>
+            <span>Back to Blog</span>
+        </a>
+        
+        <article>
+            <header class="mb-8">
+                <div class="text-sm uppercase tracking-wider text-gold font-bold mb-3">December 10, 2025</div>
+                <h1 class="font-serif text-4xl md:text-5xl font-bold text-dark mb-6">The Evolution of AI Model Serving</h1>
+            </header>
+
+            <div class="post-content p-8 md:p-12 rounded-[20px] text-dark/90 text-lg">
+                <h2>Flask</h2>
+                <p>Flask is a lightweight Python framework used to build the backend of web applications. Running securely on the server, it handles HTTP requests, URL routing, application logic, and database interactions. While the frontend relies on HTML (structure and content), CSS (styling and layout), and JavaScript (interactivity), Flask bridges the gap by rendering these files, typically using its Jinja2 templating system, to generate dynamic HTML injected with Python data. It is also the default choice for beginners to serve AI models. Its simplicity, extensive documentation, numerous resources create natural familarity with it. It has a rich ecosystem and makes the deployment procedure easy and simple. However, Flask has fundamental characteristics that make itself less suited for AI production.</p>
+                
+                <h3>WSGI and Synchronous Architecture</h3>
+                <p>Web Server Gateway Interface (WSGI) is a specification to define how a web server communicates with web applications. It specifies a standard used to determine the structure of data transfer between the web server and its interacing web applications. At this point, WSGI interface only works between WSGI servers and WSGI applications.</p>
+                
+                <p>Flask and Django are two major frameworks used to design these web applications because they specifically implement WSGI interface. Its fundamentally synchronous nature make the operations conducted in a linear flow: receive request, process it, run the application code, return response. The server spawns a fixed pool of worker processes, and each worker handles one request at a time in the synchronous model. When a request arrives, the worker accepts it and processes it until the completion before it can accept another one. WSGI protocol does not provide a native mechanism to pause handling one request, switch to another one, and then resume.</p>
+                
+                <p>Suppose we design and deploy a Flask application using a WSGI server like <em>Gunicorn</em>. When the server is initiated, we are allowed to choose how many workers will be executed, such as 4, 6, or 8. If we start Gunicorn with 4 workers, the application can process at most 4 requests concurrently; any additional requests will wait in a queue until one of the them finishes its current job and becomes free again. For an AI-serving application, this leads to two issues. First, while many conventional web requests are quick, inference calls can be relatively slow, so under high traffic the queueing delay can cause total response times to grow significantly beyond the raw model runtime. Second, each worker is a separate process that typically loads its own copy of the model into memory. For a 7 GB model, four workers may require on the order of 28 GB of memory just for model weights. This process-based scaling becomes expensive very quickly.</p>
+                
+                <h3>Limited Async Support</h3>
+                <p>While modern Flask versions introduce async support, it is not as performant as native ASGI frameworks because the underlying WSGI standard wasn't designed for async patterns. More importantly, async doesn't solve the core problem: Model inference is CPU/GPU-bound work that blocks execution regardless of whether your endpoint is sync or async. The event loop cannot proceed while <code>model.predict()</code> runs.</p>
+                
+                <h3>Multithreading</h3>
+                <p>To enhance concurrency, we can adopt multithreading strategy, where a single process can handle multiple requests in parallel by spawning several threads that share the same memory space and model instance. However, this approach is constrained by the Global Interpreter Lock (GIL), which mandates that only one thread executes Python bytecode at a time. While the GIL is released during standard I/O operations, it remains active during the execution of CPU-bound code written in pure Python.</p>
+                
+                <p>In the context of AI inference, workloads typically represent a hybrid of high-level Python logic and intensive numerical kernels. Preprocessing tasks, such as image decoding, tokenization, and input validation, are often implemented in Python and consequently contend for the GIL. Conversely, matrix multiplications, convolutions, and attention systems are implemented in C++ and, whether running on CPU or GPU, release the GIL.</p>
+                
+                <p>At this point, we also have important exceptions to be noted. For example, in HuggingFace, the tokenizers are provided in two different flavors: Pure-Python (slow) implementations and Rust-based (fast) implementations. Rust-based tokenizers not only offer faster execution, but also help to release the GIL. In image decoding, it is also better to use openCV due to its C++ nature.</p>
+                
+                <p>This means that the threads can run those low-level operations in parallel, but its surrounding orchestration, responsible for data preparation, model handoff, and post-processing, remains subject to the GIL. This effectively serializes portions of the workload when many requests are active at once. In practice, multithreading can improve throughput if most of the inference time is spent in GIL-releasing kernels, but its benefits are reduced when a significant fraction of the pipeline is Python-bound pre- and post-processing.</p>
+                
+                <h3>Manual Infrastructure Design for Modern AI Patterns</h3>
+                <p>AI services accommodate new and modern patterns, for which additional libraries and manual configurations have to be set up in Flask. For example, streaming responses are quite common in LLM applications. Similarly, WebSocket connections are used for real-time interaction:</p>
+                
+                <ul>
+                    <li><strong>Voice Assistants:</strong> The client continuously sends audio chunks by speaking, and the server processes them in real-time for speech to text.</li>
+                    <li><strong>Video Processing:</strong> The server receives a live video stream and performs object detection on incoming frames.</li>
+                </ul>
+                
+                <p>HTTP is fundamentally based on request-response cycles, but it is capable of supporting long-lived, one-way streams via chunked responses or Server-Sent Events (SSE). That works well for token-by-token LLM output to the client. Nevertheless, real-time AI workloads needs a continuous and low-latency channel to send audio or video frames back and forth without any overhead, where WebSockets or similar protocols are more convenient to satisfy lower per-message overhead. With Flask, this requires additional tooling such as <code>Flask-SocketIO</code>, which brings extra dependencies and a different deployment model, making the infrastructure more complex.</p>
+                
+                <p>Aside from these, input validation plays a pivotal role in AI systems: Tensor shape, specific data types for input and label. In Flask, we either write manual control logic or we can try to integrate <code>Flask-Marshmallow</code>.</p>
+                
+                <h2>Request-Response Lifecycle in Flask and Gunicorn</h2>
+                
+                <p><strong>1. Connection and Parsing:</strong> Gunicorn binds to a specific address and TCP port so that it can listen to and receive incoming HTTP requests. This is called Socket Binding. In this case, that port number is actually reserved for the server and the kernel is notified about it. A stream of raw bytes is transferred through this port. Gunicorn decodes them into text to understand the request line, headers, and body. This parsed HTTP is then packaged into WSGI format and used to call our Flask application.</p>
+                
+                <p><strong>2. Application Initialization:</strong> Upon receiving WSGI data, Flask performs two preparatory operations before executing any logic and generating a response:</p>
+                
+                <ul>
+                    <li><strong>URL Routing:</strong> Flask inspects URL and HTTP method to decide which function should handle it. The request is matched against the patterns defined by <code>@app.route()</code> decorators and dispatches that request to the corresponding view function.</li>
+                    <li><strong>Request Encapsulation:</strong> Flask wraps the raw WSGI data into its own <code>request</code> object. This gives us easy access to the properties like <code>request.args</code>, <code>request.form</code>, and <code>request.json</code>.</li>
+                </ul>
+                
+                <p><strong>3. Execution and Response:</strong> Once routing and request encapsulation are completed, Flask executes the targeted view function, which is commonly called request handling. At that point, the function's return value is then packaged into a proper HTTP response with status code, headers, and body. Finally, Flask passes this response back to Gunicorn in WSGI format. Gunicorn serializes this data back into raw HTTP bytes and transmits the final response to the client.</p>
+                
+                <h2>FastAPI</h2>
+                
+                <p>FastAPI is an asynchronous web application framework. Its core architecture is built upon Asynchronous Server Gateway Interface (ASGI). This inherently dictates which type of web servers is required to run FastAPI applications. At this point, Uvicorn is the default and most recommended choice.</p>
+                
+                <p>The relationship between framework and server follows a consistent pattern: Synchronous frameworks communicate through WSGI to synchronous servers, while asynchronous frameworks communicate through ASGI to asynchronous servers.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Web Application</th>
+                            <th>Protocol</th>
+                            <th>Web Server</th>
+                            <th>Kind</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Flask</strong></td>
+                            <td>WSGI</td>
+                            <td>Gunicorn / uWSGI</td>
+                            <td>Synchronous (Blocking)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Django</strong></td>
+                            <td>WSGI / ASGI</td>
+                            <td>Gunicorn / Uvicorn / Daphne</td>
+                            <td>Synchronous with async support</td>
+                        </tr>
+                        <tr>
+                            <td><strong>FastAPI</strong></td>
+                            <td>ASGI</td>
+                            <td>Uvicorn / Hypercorn</td>
+                            <td>Asynchronous (Non-blocking)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>Django has two separate entry points now, where we can execute it with either WSGI or ASGI server. ASGI support was introduced in Django 3.0. However, Django's core utilities and ecosystem are still primarily synchronous; that is why, it is not as performant as native ASGI frameworks.</p>
+                
+                <h3>Improvements Over Flask</h3>
+                
+                <h4>Concurrency for I/O</h4>
+                <p>Its native async support provides noticeable advantage for I/O bound operations. A single process can handle thousands of concurrent requests waiting on network or database latency, because it never idles. When a request needs to pause for an external API call or database query, the event loop sets it aside and immediately starts processing another request. When the external response arrives, the original request resumes where it left off.</p>
+                
+                <h4>Built-in Modern Features</h4>
+                <p>It supports WebSockets, streaming responses, request/response validation via Pydantic, and automatic API documentation natively. In that way, infrastructure design for robust AI services tends to be simplified.</p>
+                
+                <h2>Shared Limitations: Why General Web Frameworks Fall Short for AI</h2>
+                
+                <p>While FastAPI addresses some of the shortcomings in Flask, both frameworks still share fundamental limitations in terms of AI model serving. In other words, they are unable to realize or at least compensate for the strategies and computation techniques used for AI models. These are actually not the weaknesses specific to either framework, but rather inherent constraints of using general purpose web frameworks for AI services.</p>
+                
+                <h3>Async Doesn't Solve Inference Blocking</h3>
+                <p>FastAPI's async capabilities are beneficial only when target tasks require waiting, which is commonly observed in I/O-bound operations (database queries, file reads). At that point, the event loop can switch to handle other requests. However, CPU-bound tasks are operated differently. When inference code is actively computing the model's forward pass, it occupies CPU/GPU resources. Within a single process and event loop, Python's async machinery is unable to preempt that computation to run another coroutine in parallel. Other processes or threads can still work, but the fundamental cost of one inference call remains unchanged. As a result, the fundamental bottleneck of AI inference remains identical whether you use Flask or FastAPI; async does not magically parallelize multiple requests of model inference.</p>
+                
+                <h3>Missing Primitives for High-Performance Inference</h3>
+                <p>Model serving is not only about delivering the boxes, it is also about managing what is inside them and how effectively they can be delivered. In other words, it requires more than simply exposing an HTTP endpoint; it demands rigorous optimization of the inference lifecycle. Flask and FastAPI lack the native architectural primitives required for high-performance inference scenarios, forcing the developers to build that complex orchestration logic from scratch every time. The extent of this manual overhead becomes more evident and understandable with the following aspects of production environment:</p>
+                
+                <ul>
+                    <li><strong>Batching:</strong> Processing the requests one at a time is highly inefficient. It leads to poor hardware utilization, especially on GPUs, and increases overall latency. At the end, multi-core CPUs or GPUs are not fully utilized and throughput is reduced. Neither Flask nor FastAPI has built-in mechanisms to wait and collect the requests for batch processing. The developers must implement this logic manually.</li>
+                    <li><strong>Autoscaling:</strong> We can serve and scale our AI model across multiple GPUs in the same machine and even different machines depending on the request traffic. Nevertheless, this requires complex and manual configuration: spawning processes, managing GPU assignments, distributing requests by a load balancer, and tuning the performance. For every deployment, we need to design this logic manually; there is no out-of-the-box support for dynamic scaling tied to actual demand.</li>
+                    <li><strong>Deployment:</strong> When we deploy an application to the cloud, we typically need to write a <code>Dockerfile</code> to package our source code, model files, Python runtime and the dependencies into a container. At this point, we first need to choose a base image, which will be the foundation of the container, and then decide on which packages we install. Apart from these, we expose the ports and configure environment variables in this Dockerfile, all of which can be really tedious and error-prone. This process is only one side of the coin. After the completion of these steps and thereby building the container, we manually upload it into a container registry and configure the cloud infrastructure primarily through an orchestration system to handle networking, scaling groups, and load balancer to run the application. FastAPI itself does not handle any of these; it focuses purely on the application logic.</li>
+                </ul>
+                
+                <h2>LitServe</h2>
+                
+                <p>LitServe is an AI serving engine built on FastAPI. It leverages FastAPI's ecosystem; however, it replaces standard web application logic with an architecture specialized for AI inference. This design aims to address the major limitations of general web frameworks by introducing dynamic batching, autoscaling, high-level GPU resource management, and performance optimization together with simplified deployment. These features serve as high-level abstractions of manual configurations to remove the need for repetitive boilerplate implementation, streamline the deployment process, and ensure high performance without requiring developers to write custom optimization from scratch:</p>
+                
+                <ul>
+                    <li><strong>Automatic Batching:</strong> We can simply define a batch size. LitServe automatically pauses incoming requests, collects them into a batch, and sends them to the GPU as a single tensor. This improves system throughput and resource utilization with minimal latency. In FastAPI, we need to write complex loops, locks, and queues to achieve this safely.</li>
+                    <li><strong>Autoscaling:</strong> The workload in AI services can vary significantly over time. At that point, adjusting the usage of resources depending on the current demand plays a pivotal role. LitServe enables us to take care of scaling our model across GPUs and different machines without manual configuration. It dynamically spins up or down the workers as needed to handle varying loads to make sure we are using the resources optimally.</li>
+                    <li><strong>Simplified Deployment:</strong> LitServe offers a streamlined pipeline that automates intermediate steps of the deployment process, thereby eliminating much of the tedious and time-consuming manual effort. First of all, it generates a <code>Dockerfile</code> from <code>requirements.txt</code>. Once <code>Dockerfile</code> is ready, LitServe takes one step further and build the docker container and uploads it into Lightning AI Cloud Platform. This is where the cloud provider comes in; it takes over to provision the necessary infrastructure where autoscaling, GPU management and secure API serving are automatically carried out. This eliminates the need to manually configure load balancers, scaling groups and container orchestrators like kubernetes. As a result, deploying an AI service becomes significantly faster and easier.</li>
+                </ul>
+            </div>
+
+            <div class="flex flex-wrap gap-3 mt-8">
+                <span class="tag">Model Serving</span>
+                <span class="tag">Flask</span>
+                <span class="tag">FastAPI</span>
+                <span class="tag">LitServe</span>
+            </div>
+        </article>
+
+        <footer class="mt-16 text-center text-sm text-gray-secondary font-serif opacity-70">
+            <p>© 2025 Goktug Guvercin. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
