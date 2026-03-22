@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FAQ - Goktug Guvercin - Machine Learning Scientist">
+    <title>FAQ - Goktug Guvercin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#f5ebe0',
+              gold: '#d4a373',
+              dark: '#2c2c2c',
+              sand: '#ede5d8',
+              gray: { primary: '#5a5a5a', secondary: '#666666' }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            backgroundImage: {
+              'warm-radial': 'radial-gradient(circle at 15% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 25%), radial-gradient(circle at 85% 30%, rgba(26, 115, 232, 0.05) 0%, transparent 25%)',
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5ebe0; }
+        ::-webkit-scrollbar-thumb { background: #d4a373; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c29365; }
+
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .category-item {
+            padding: 1rem 1.25rem;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .category-item:hover {
+            background: rgba(212, 163, 115, 0.1);
+            border-left-color: #d4a373;
+        }
+
+        .category-item.active {
+            background: rgba(212, 163, 115, 0.15);
+            border-left-color: #d4a373;
+        }
+
+        .category-item.active .cat-name {
+            color: #d4a373;
+        }
+
+        .preview-question {
+            padding: 0.75rem 1rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            border: 1px solid transparent;
+        }
+
+        .preview-question:hover {
+            background: rgba(212, 163, 115, 0.08);
+            border-color: rgba(212, 163, 115, 0.3);
+        }
+
+        .question-arrow {
+            opacity: 0;
+            transform: translateX(-4px);
+            transition: all 0.2s ease;
+        }
+
+        .preview-question:hover .question-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .preview-fade-in {
+            animation: previewFade 0.3s ease-out forwards;
+        }
+
+        @keyframes previewFade {
+            from { opacity: 0; transform: translateX(8px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .count-badge {
+            background: linear-gradient(135deg, #d4a373, #c4935e);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+            min-width: 1.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-cream bg-warm-radial bg-fixed min-h-screen text-dark font-sans antialiased pb-16">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gold/30 py-4">
+        <div class="max-w-[900px] mx-auto px-8 flex justify-center gap-10">
+            <a href="index.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                About
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="projects.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Projects
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="blog.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Blog
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="faq.html" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                FAQ
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-full transition-all duration-300"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="mt-[120px] w-full max-w-[1100px] mx-auto px-6 md:px-8 fade-in">
+
+        <header class="text-center mb-16">
+            <h1 class="font-serif text-5xl md:text-6xl font-bold text-dark mb-4">ML Knowledge Base</h1>
+            <p class="text-lg md:text-xl text-gray-secondary italic">Frequently asked questions and concise explanations</p>
+        </header>
+
+        <main>
+            <div class="flex flex-col md:flex-row gap-6">
+                <!-- Sidebar -->
+                <div class="md:w-[280px] flex-shrink-0">
+                    <div class="bg-sand/90 backdrop-blur-xl border border-white/60 rounded-[20px] shadow-sm overflow-hidden md:sticky md:top-[100px]"
+                         style="border: 1px solid rgba(212, 163, 115, 0.7); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);">
+                        <div class="px-5 py-4 border-b border-gold/20">
+                            <h2 class="font-serif text-lg font-semibold text-dark">Categories</h2>
+                        </div>
+                        <div id="categoryList"></div>
+                    </div>
+                </div>
+
+                <!-- Preview Panel -->
+                <div class="flex-1">
+                    <div class="bg-sand/90 backdrop-blur-xl border border-white/60 rounded-[20px] shadow-sm p-8 md:p-10 min-h-[400px]"
+                         style="border: 1px solid rgba(212, 163, 115, 0.7); box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);">
+                        <div id="previewContent">
+                            <div class="flex flex-col items-center justify-center h-[300px] text-center">
+                                <p class="text-2xl font-serif text-dark/40 mb-2">Select a category</p>
+                                <p class="text-gray-secondary">Click a topic on the left to preview its questions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="mt-20 text-center text-sm text-gray-secondary font-serif opacity-70">
+            <p>&copy; 2025 Goktug Guvercin. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const categories = [
+            {
+                name: "LLM Fundamentals",
+                slug: "faq/llm.html",
+                questions: [
+                    "What is context window?",
+                    "How is context window determined for an LLM?",
+                    "What are hallucination guardrails?",
+                    "Which metrics can be used for evaluating generative LLMs?"
+                ]
+            },
+            {
+                name: "Training & Fine-tuning",
+                slug: "faq/training.html",
+                questions: [
+                    "What is catastrophic forgetting?",
+                    "How can we mitigate catastrophic forgetting?"
+                ]
+            },
+            {
+                name: "RAG & Information Retrieval",
+                slug: "faq/rag.html",
+                questions: [
+                    "Can you explain some chunking strategies?"
+                ]
+            },
+            {
+                name: "MLOps & Deployment",
+                slug: "faq/mlops.html",
+                questions: [
+                    "A/B Test in Model Deployment?"
+                ]
+            },
+            {
+                name: "Attention & Transformers",
+                slug: "faq/transformers.html",
+                questions: [
+                    "Coming soon..."
+                ]
+            }
+        ];
+
+        const categoryList = document.getElementById('categoryList');
+        const previewContent = document.getElementById('previewContent');
+
+        categories.forEach((cat, idx) => {
+            const item = document.createElement('div');
+            item.className = 'category-item';
+            item.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <span class="cat-name font-medium text-dark text-[0.95rem]">${cat.name}</span>
+                    <span class="count-badge">${cat.questions.length}</span>
+                </div>
+            `;
+            item.addEventListener('click', () => selectCategory(idx));
+            categoryList.appendChild(item);
+        });
+
+        function selectCategory(idx) {
+            const cat = categories[idx];
+
+            document.querySelectorAll('.category-item').forEach((el, i) => {
+                el.classList.toggle('active', i === idx);
+            });
+
+            const questionsHtml = cat.questions.map(q => `
+                <div class="preview-question flex items-center gap-3">
+                    <span class="text-gold question-arrow">&#9654;</span>
+                    <span class="text-dark/90">${q}</span>
+                </div>
+            `).join('');
+
+            previewContent.innerHTML = `
+                <div class="preview-fade-in">
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="font-serif text-2xl font-semibold text-dark">${cat.name}</h3>
+                        <a href="${cat.slug}" class="text-sm font-medium text-gold hover:text-[#c4935e] transition-colors">
+                            View All &rarr;
+                        </a>
+                    </div>
+                    <div class="space-y-2">
+                        ${questionsHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Select first category by default
+        selectCategory(0);
+    </script>
+</body>
+</html>
