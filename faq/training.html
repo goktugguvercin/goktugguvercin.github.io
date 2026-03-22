@@ -34,6 +34,18 @@
       }
     </script>
 
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         html { scroll-behavior: smooth; }
         ::-webkit-scrollbar { width: 8px; }
@@ -152,8 +164,7 @@
         const qaData = [
             {
                 question: "What is catastrophic forgetting?",
-                answer: `<p>Catastrophic forgetting is a phenomenon commonly observed in both computer vision and language models. During training, as a model's weights are updated, it learns to make predictions tailored to a specific task and domain.</p>
-                <p>However, if we sequentially re-train the entire architecture on a new task, or the same task in a different domain, the knowledge the model learnt during the initial training will be overwritten and disappear. Therefore, training a model multiple times in a sequential manner does not naturally result in incremental learning.</p>`
+                answer: `<p>Catastrophic forgetting is a phenomenon observed in neural networks where a model loses previously learned knowledge when it is trained sequentially on new tasks or data. As the model’s weights are updated to learn the new task or domain, the information learned from earlier tasks can be overwritten and vanished. As a result, training a model sequentially on multiple tasks does not naturally lead to incremental learning, since the model tends to forget earlier knowledge while adapting to new data.</p>`
             },
             {
                 question: "How can we mitigate catastrophic forgetting?",
@@ -183,6 +194,10 @@
             `;
             qaList.appendChild(card);
         });
+
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise();
+        }
 
         function toggleAnswer(idx) {
             const answer = document.getElementById(`answer-${idx}`);

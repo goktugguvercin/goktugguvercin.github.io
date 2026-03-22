@@ -34,6 +34,18 @@
       }
     </script>
 
+    <!-- MathJax for LaTeX rendering -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']],
+                processEscapes: true
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
     <style>
         html { scroll-behavior: smooth; }
         ::-webkit-scrollbar { width: 8px; }
@@ -151,33 +163,32 @@
     <script>
         const qaData = [
             {
-                question: "What is context window?",
-                answer: `<p>A context window is the maximum number of tokens that a large language model (LLM) can process in a single interaction. It includes all tokens from the system prompt, user input, conversation history, and the tokens generated in the model's response.</p>
-                <p>That is why, as conversation gets deeper and deeper, we consume more tokens, and get close to context window limit.</p>`
+                question: "What is a context window in LLMs?",
+                answer: `<p>The context window is the maximum number of tokens that a large language model can receive as input, process, and generate at one time. This includes all tokens coming from the system prompt, user input, conversation history, and the tokens generated as model response. 
+                    That is why, as our multi-turn conversation grows longer, more tokens are used, bringing the interaction closer to context window limit.</p>`
             },
             {
-                question: "How is context window determined for an LLM?",
-                answer: `<p>Context window is determined by three main factors:</p>
-                <p><strong>1. Positional Encoding</strong></p>
-                <p>Language models process all tokens at the same time in parallel. In other words, the tokens are not processed sequentially in a specific order. To understand word order in the sentences, the model assigns specific "positional indices" to every single token. Maximum sequence length defines upper limit of positional indices. This is internally defined in learnt positional encoding.</p>
-                <p><strong>2. Memory and Computational Complexity Bottleneck</strong></p>
-                <p>Every token is compared with every token to calculate their mutual relevance score. This is done by dot product of query and key matrices. Here, both computation and memory complexity are proportional to N&sup2;, where N is equal to the number of tokens. If we double the context window, memory and computation complexity are quadrupled. That is why, according to pre-determined value, the sequences with more tokens than context window are truncated.</p>
-                <p><strong>3. Training Sequence Length</strong></p>
-                <p>In training stage, a sequence length is chosen, and the sequences longer than that are either truncated or split into multiple chunks and these chunks are packed into single sequence with a separation of a special token to fill full length.</p>`
+                question: "What determines the context window size of an LLM?",
+                answer: `<p>The primary factor limiting context window size is the memory and computational complexity of the self-attention mechanism in transformer architectures. Self-attention computes pairwise interactions between every token in the input sequence to calculate attention scores.
+                    To accomplish this, the query and key matrices are multiplied ($Q_{(N \\times d)} \\times K^T_{(d \\times N)}$), and the resulting $N \\times N$ attention matrix is stored in memory. This means that computation scales as $\\mathcal{O}(N^2 d)$ and memory is consumed by an $N \\times N$ matrix, where $N$ is at most the context window size.
+                    Due to hardware constraints, this quadratic scaling places a practical upper bound on context window size.</p>
+
+                    <p>A secondary factor is positional encoding. Earlier transformer models used absolute learned positional embeddings, defined as a fixed lookup table on an embedding layer. This approach required knowing the maximum sequence length at training time, making it inherently rigid.
+                    Modern architectures have largely moved to Rotary Positional Embedding (RoPE), which encodes relative position rather than absolute. This allows better generalization to sequence lengths not seen during training.</p>`
             },
             {
-                question: "What are hallucination guardrails?",
-                answer: `<p><strong>Strict System Prompts:</strong> We can inject hidden rules and strict instructions in a system prompt to prevent the model from fabricating something incorrect or to make it follow specific behavioral pattern or protocol. This alleviates the hallucination. For example, we can say <em>"You are an assistant. Only answer using the text provided below. If the answer is not in the text, you must reply 'I do not know'."</em></p>
-                <p><strong>Retrieval Augmented Generation:</strong> With the help of RAG, we can search the input prompt in a vector database, find the relevant documents and external resources, retrieve and provide them for the model so that it can use this verified, factual information while generating an answer.</p>
-                <p><strong>Using Lower Temperature:</strong> Temperature controls how much randomness or determinism will be allowed when the model predicts the next token. If we use lower temperature, the model will predict what it exactly learnt from the dataset it was trained on. This reduces hallucination.</p>
-                <p><strong>Self-Consistency and Secondary LLM:</strong> This is actually a post-generation guardrail. We can use a secondary model to verify the generated output or generate multiple versions of same answer with the same model and compare between them.</p>`
+                question: "How can we reduce hallucinations in LLMs?",
+                answer: `<p><strong>Strict System Prompts:</strong> We can inject hidden rules and strict instructions in the system prompt to guide the model's behavior and prevent it from fabricating something incorrect. For example, we can write in the system prompt, "Only answer using the provided text. If the answer is not present, reply ‘I do not know’.". This helps steer the model, but does not completely eliminate hallucinations.</em></p>
+                <p><strong>Retrieval Augmented Generation:</strong> RAG enables us to embed the user query, perform similarity search against a vector database of pre-embedded document chunks, retrieve the most relevant passages, and provide them as grounded context for the model to use while generating an answer. In this way, the model relies on verified, factual information rather than solely on its parametric knowledge.</p>
+                <p><strong>Using Lower Temperature:</strong> Temperature controls how much randomness and determinism will be allowed when the model predicts the next token. If we use a lower temperature, the model will predict what it exactly learned from the dataset it was trained on. This makes the generated output more deterministic and thereby reducing the hallucination. However, it does not guarantee correctness, if the underlying training data contains inaccuracies.</p>
+                <p><strong>Self-Consistency and Secondary LLM:</strong> This is actually a post-generation guardrail against hallucinations. We can generate multiple answers and compare them for consistency, or use a secondary model to verify the output of the primary model. This helps detect and filter potentially hallucinated responses.</p>`
             },
             {
-                question: "Which metrics can be used for evaluating generative LLMs?",
-                answer: `<p><strong>BLEU:</strong> It compares n-gram overlap between generated text and reference text. This metric is designed for machine translation. Its main weakness is that two sentences can mean the same thing with different words, and it generates a score of zero.</p>
-                <p><strong>ROUGE:</strong> It is similar to BLEU score, but it focuses on recall not precision. In BLEU score, of all n-grams in generated text, how many appear in the reference text? In contrast, ROUGE measures of all n-grams in the reference text, how many appear in generated text. This metric is designed for summarization.</p>
-                <p><strong>BERTScore:</strong> It does not match the words, instead it computes cosine similarity between the embeddings of generated tokens and reference tokens. In that way, it captures semantic similarity rather than surface overlap. For paraphrasing, it is much better than BLEU and ROUGE.</p>
-                <p><strong>METEOR:</strong> This metric was designed to fix the weakness of BLEU score. Exact word matching is not enough; hence, it also performs stem matching, synonym matching, and paraphrase matching in this order. After this matching, it computes both precision and recall, then combines them into an F-score.</p>`
+                question: "What are the common metrics to evaluate text generation?",
+                answer: `<p><strong>BLEU:</strong> This metric measures n-gram overlap between the generated text and a reference text, and is widely used in machine translation. It focuses on precision: Of all n-grams in the generated text, how many of them appear in the reference text.</p>
+                <p><strong>ROUGE:</strong> It is similar to BLEU, but it focuses on recall rather than precision: Of all n-grams in the reference text, how many of them appear in the generated text. This metric is designed for summarization.</p>
+                <p><strong>BERTScore:</strong> Instead of exact word matching, this metric computes cosine similarity between contextual embeddings of tokens in the generated and reference texts. This allows it to capture semantic similarity, and thereby making it more robust to paraphrasing compared to BLEU and ROUGE.</p>
+                <p><strong>METEOR:</strong> This metric was designed to address the limitations of BLEU. It goes beyond exact word matching by also performing stem matching, synonym matching, and paraphrase matching sequentially, where each stage handles the tokens left unmatched by the previous one. Then, it computes both precision and recall, and combines them into an F-score.</p>`
             }
         ];
 
@@ -199,6 +210,11 @@
             `;
             qaList.appendChild(card);
         });
+
+        // Typeset LaTeX after dynamic content is inserted
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise();
+        }
 
         function toggleAnswer(idx) {
             const answer = document.getElementById(`answer-${idx}`);
