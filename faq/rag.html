@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="RAG & Information Retrieval - FAQ - Goktug Guvercin">
+    <title>RAG & Information Retrieval - FAQ - Goktug Guvercin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#f5ebe0',
+              gold: '#d4a373',
+              dark: '#2c2c2c',
+              sand: '#ede5d8',
+              gray: { primary: '#5a5a5a', secondary: '#666666' }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            backgroundImage: {
+              'warm-radial': 'radial-gradient(circle at 15% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 25%), radial-gradient(circle at 85% 30%, rgba(26, 115, 232, 0.05) 0%, transparent 25%)',
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5ebe0; }
+        ::-webkit-scrollbar-thumb { background: #d4a373; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c29365; }
+
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .qa-card {
+            background: rgba(237, 229, 216, 0.9);
+            border: 1px solid rgba(212, 163, 115, 0.7);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .qa-card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .qa-question {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: background 0.2s ease;
+        }
+
+        .qa-question:hover {
+            background: rgba(212, 163, 115, 0.1);
+        }
+
+        .qa-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .qa-answer.open {
+            max-height: 2000px;
+            opacity: 1;
+        }
+
+        .qa-arrow {
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .qa-arrow.rotated {
+            transform: rotate(180deg);
+        }
+
+        .back-link {
+            color: #d4a373;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #c4935e;
+        }
+    </style>
+</head>
+<body class="bg-cream bg-warm-radial bg-fixed min-h-screen text-dark font-sans antialiased pb-16">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gold/30 py-4">
+        <div class="max-w-[900px] mx-auto px-8 flex justify-center gap-10">
+            <a href="../index.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                About
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="../projects.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Projects
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="../blog.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Blog
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="../faq.html" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                FAQ
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-full transition-all duration-300"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="mt-[120px] w-full max-w-[850px] mx-auto px-6 md:px-8 fade-in">
+
+        <div class="mb-8">
+            <a href="../faq.html" class="back-link">&larr; Back to FAQ</a>
+        </div>
+
+        <header class="mb-12">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-dark mb-3">RAG & Information Retrieval</h1>
+            <p class="text-lg text-gray-secondary italic">Retrieval-augmented generation and document processing</p>
+        </header>
+
+        <main class="space-y-5" id="qaList"></main>
+
+        <footer class="mt-20 text-center text-sm text-gray-secondary font-serif opacity-70">
+            <p>&copy; 2025 Goktug Guvercin. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const qaData = [
+            {
+                question: "Can you explain some chunking strategies?",
+                answer: `<p><strong>Recursive Chunking:</strong> Recursive chunker receives a list of characters as separators. It splits the text into sub units by using each of those separators in given order. The next separator is used only when resulting chunks are still larger than chunk size. Consecutive chunks are merged if their merged size is still lower than target chunk size.</p>
+                <p><strong>Semantic Chunking:</strong> Semantic chunker breaks the text into individual sentences and computes an embedding vector for each of those sentences. Then, these embeddings are compared to detect the break points where the topic changes. The chunks are defined between these breakpoints.</p>
+                <p><strong>Document-based Chunking:</strong> Document chunkers use intrinsic structure of the documents to discover the chunks. For example, a document chunker defined for markdown focuses on headings, and it uses header characters to capture sections and sub-sections.</p>
+                <p><strong>LLM-based Chunking:</strong> An LLM model is used to identify logically similar sections. Then, it summarizes them into smaller meaning-preserving chunks.</p>`
+            }
+        ];
+
+        const qaList = document.getElementById('qaList');
+
+        qaData.forEach((item, idx) => {
+            const card = document.createElement('div');
+            card.className = 'qa-card';
+            card.innerHTML = `
+                <div class="qa-question" onclick="toggleAnswer(${idx})">
+                    <span class="font-semibold text-lg text-dark">${item.question}</span>
+                    <span class="qa-arrow text-gold text-sm" id="arrow-${idx}">&#9660;</span>
+                </div>
+                <div class="qa-answer" id="answer-${idx}">
+                    <div class="px-6 pb-5 pt-2 text-dark/85 leading-relaxed space-y-3">
+                        ${item.answer}
+                    </div>
+                </div>
+            `;
+            qaList.appendChild(card);
+        });
+
+        function toggleAnswer(idx) {
+            const answer = document.getElementById(`answer-${idx}`);
+            const arrow = document.getElementById(`arrow-${idx}`);
+            answer.classList.toggle('open');
+            arrow.classList.toggle('rotated');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LLM Fundamentals - FAQ - Goktug Guvercin">
+    <title>LLM Fundamentals - FAQ - Goktug Guvercin</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#f5ebe0',
+              gold: '#d4a373',
+              dark: '#2c2c2c',
+              sand: '#ede5d8',
+              gray: { primary: '#5a5a5a', secondary: '#666666' }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            backgroundImage: {
+              'warm-radial': 'radial-gradient(circle at 15% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 25%), radial-gradient(circle at 85% 30%, rgba(26, 115, 232, 0.05) 0%, transparent 25%)',
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5ebe0; }
+        ::-webkit-scrollbar-thumb { background: #d4a373; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c29365; }
+
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .qa-card {
+            background: rgba(237, 229, 216, 0.9);
+            border: 1px solid rgba(212, 163, 115, 0.7);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .qa-card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .qa-question {
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            transition: background 0.2s ease;
+        }
+
+        .qa-question:hover {
+            background: rgba(212, 163, 115, 0.1);
+        }
+
+        .qa-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .qa-answer.open {
+            max-height: 2000px;
+            opacity: 1;
+        }
+
+        .qa-arrow {
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .qa-arrow.rotated {
+            transform: rotate(180deg);
+        }
+
+        .back-link {
+            color: #d4a373;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: #c4935e;
+        }
+    </style>
+</head>
+<body class="bg-cream bg-warm-radial bg-fixed min-h-screen text-dark font-sans antialiased pb-16">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gold/30 py-4">
+        <div class="max-w-[900px] mx-auto px-8 flex justify-center gap-10">
+            <a href="../index.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                About
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="../projects.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Projects
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="../blog.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Blog
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="../faq.html" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                FAQ
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-full transition-all duration-300"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="mt-[120px] w-full max-w-[850px] mx-auto px-6 md:px-8 fade-in">
+
+        <div class="mb-8">
+            <a href="../faq.html" class="back-link">&larr; Back to FAQ</a>
+        </div>
+
+        <header class="mb-12">
+            <h1 class="font-serif text-4xl md:text-5xl font-bold text-dark mb-3">LLM Fundamentals</h1>
+            <p class="text-lg text-gray-secondary italic">Core concepts behind large language models</p>
+        </header>
+
+        <main class="space-y-5" id="qaList"></main>
+
+        <footer class="mt-20 text-center text-sm text-gray-secondary font-serif opacity-70">
+            <p>&copy; 2025 Goktug Guvercin. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const qaData = [
+            {
+                question: "What is context window?",
+                answer: `<p>A context window is the maximum number of tokens that a large language model (LLM) can process in a single interaction. It includes all tokens from the system prompt, user input, conversation history, and the tokens generated in the model's response.</p>
+                <p>That is why, as conversation gets deeper and deeper, we consume more tokens, and get close to context window limit.</p>`
+            },
+            {
+                question: "How is context window determined for an LLM?",
+                answer: `<p>Context window is determined by three main factors:</p>
+                <p><strong>1. Positional Encoding</strong></p>
+                <p>Language models process all tokens at the same time in parallel. In other words, the tokens are not processed sequentially in a specific order. To understand word order in the sentences, the model assigns specific "positional indices" to every single token. Maximum sequence length defines upper limit of positional indices. This is internally defined in learnt positional encoding.</p>
+                <p><strong>2. Memory and Computational Complexity Bottleneck</strong></p>
+                <p>Every token is compared with every token to calculate their mutual relevance score. This is done by dot product of query and key matrices. Here, both computation and memory complexity are proportional to N&sup2;, where N is equal to the number of tokens. If we double the context window, memory and computation complexity are quadrupled. That is why, according to pre-determined value, the sequences with more tokens than context window are truncated.</p>
+                <p><strong>3. Training Sequence Length</strong></p>
+                <p>In training stage, a sequence length is chosen, and the sequences longer than that are either truncated or split into multiple chunks and these chunks are packed into single sequence with a separation of a special token to fill full length.</p>`
+            },
+            {
+                question: "What are hallucination guardrails?",
+                answer: `<p><strong>Strict System Prompts:</strong> We can inject hidden rules and strict instructions in a system prompt to prevent the model from fabricating something incorrect or to make it follow specific behavioral pattern or protocol. This alleviates the hallucination. For example, we can say <em>"You are an assistant. Only answer using the text provided below. If the answer is not in the text, you must reply 'I do not know'."</em></p>
+                <p><strong>Retrieval Augmented Generation:</strong> With the help of RAG, we can search the input prompt in a vector database, find the relevant documents and external resources, retrieve and provide them for the model so that it can use this verified, factual information while generating an answer.</p>
+                <p><strong>Using Lower Temperature:</strong> Temperature controls how much randomness or determinism will be allowed when the model predicts the next token. If we use lower temperature, the model will predict what it exactly learnt from the dataset it was trained on. This reduces hallucination.</p>
+                <p><strong>Self-Consistency and Secondary LLM:</strong> This is actually a post-generation guardrail. We can use a secondary model to verify the generated output or generate multiple versions of same answer with the same model and compare between them.</p>`
+            },
+            {
+                question: "Which metrics can be used for evaluating generative LLMs?",
+                answer: `<p><strong>BLEU:</strong> It compares n-gram overlap between generated text and reference text. This metric is designed for machine translation. Its main weakness is that two sentences can mean the same thing with different words, and it generates a score of zero.</p>
+                <p><strong>ROUGE:</strong> It is similar to BLEU score, but it focuses on recall not precision. In BLEU score, of all n-grams in generated text, how many appear in the reference text? In contrast, ROUGE measures of all n-grams in the reference text, how many appear in generated text. This metric is designed for summarization.</p>
+                <p><strong>BERTScore:</strong> It does not match the words, instead it computes cosine similarity between the embeddings of generated tokens and reference tokens. In that way, it captures semantic similarity rather than surface overlap. For paraphrasing, it is much better than BLEU and ROUGE.</p>
+                <p><strong>METEOR:</strong> This metric was designed to fix the weakness of BLEU score. Exact word matching is not enough; hence, it also performs stem matching, synonym matching, and paraphrase matching in this order. After this matching, it computes both precision and recall, then combines them into an F-score.</p>`
+            }
+        ];
+
+        const qaList = document.getElementById('qaList');
+
+        qaData.forEach((item, idx) => {
+            const card = document.createElement('div');
+            card.className = 'qa-card';
+            card.innerHTML = `
+                <div class="qa-question" onclick="toggleAnswer(${idx})">
+                    <span class="font-semibold text-lg text-dark">${item.question}</span>
+                    <span class="qa-arrow text-gold text-sm" id="arrow-${idx}">&#9660;</span>
+                </div>
+                <div class="qa-answer" id="answer-${idx}">
+                    <div class="px-6 pb-5 pt-2 text-dark/85 leading-relaxed space-y-3">
+                        ${item.answer}
+                    </div>
+                </div>
+            `;
+            qaList.appendChild(card);
+        });
+
+        function toggleAnswer(idx) {
+            const answer = document.getElementById(`answer-${idx}`);
+            const arrow = document.getElementById(`arrow-${idx}`);
+            answer.classList.toggle('open');
+            arrow.classList.toggle('rotated');
+        }
+    </script>
+</body>
+</html>
