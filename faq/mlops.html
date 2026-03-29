@@ -171,6 +171,11 @@
                     <li>If content is flagged as harmful, users can confirm or reject the decision.</li>
                     <li>If content is not flagged, users can report it as harmful.</li>
                 </ul>`
+            },
+            {
+                question: "What is NGINX and why is it used with Uvicorn?",
+                answer: `<p>Uvicorn is an ASGI server that listens for HTTP requests and returns responses for applications such as FastAPI. However, it is not designed to act as a full internet-facing gateway. It lacks advanced protections such as robust handling of slow clients, built-in rate limiting, and strong filtering of malformed or malicious traffic at the network level. While it supports HTTPS, it does not provide the same level of robustness and operational features as dedicated web servers or reverse proxies.</p>
+                <p>Because of these limitations, Uvicorn is typically placed behind a reverse proxy in production, such as NGINX or Caddy. These proxies can buffer requests, enforce rate limiting, and protect against abusive traffic. In addition, they handle TLS termination — managing SSL certificates, encrypting traffic with clients, and forwarding requests to Uvicorn over plain HTTP internally.</p>`
             }
         ];
 
