@@ -168,6 +168,17 @@
                 <p><strong>Semantic Chunking:</strong> Semantic chunker breaks the text into individual sentences and computes an embedding vector for each of those sentences. Then, these embeddings are compared to detect the break points where the topic changes. The chunks are defined between these breakpoints.</p>
                 <p><strong>Document-based Chunking:</strong> Document chunkers use intrinsic structure of the documents to discover the chunks. For example, a document chunker defined for markdown focuses on headings, and it uses header characters to capture sections and sub-sections.</p>
                 <p><strong>LLM-based Chunking:</strong> An LLM model is used to identify logically similar sections. Then, it summarizes them into smaller meaning-preserving chunks.</p>`
+            },
+            {
+                question: "How does Elasticsearch implement hybrid search (Lexical + Semantic)?",
+                answer: `<p>Elasticsearch was originally a keyword-based search engine, but now it also supports semantic search.</p>
+                <p>Its lexical component as keyword search uses an inverted index to quickly look up and identify which documents contain the query words. The main strategy that it follows is <strong>Best Match 25 (BM25)</strong> algorithm, not only checking whether a word appears in the document or not, but also calculating relevance score based on Term Frequency and Inverse Document Frequency.</p>
+                <p>For semantic search, the system leverages dense embedding vectors to retrieve content based on contextual meaning. Because comparing millions of mathematical vectors sequentially would be too slow, the system employs the <strong>Hierarchical Navigable Small World (HNSW)</strong> algorithm. As a specific variant of Approximate Nearest Neighbor (ANN) search, HNSW constructs a proximity graph where dense vectors act as nodes and their mutual similarities define the edges. This architecture achieves logarithmic complexity ($O(\log N)$), effectively creating a "highway system" that allows the engine to bypass irrelevant regions of the graph and rapidly locate close neighbors.</p>
+                <p>Currently, Elasticsearch combines these two approaches to perform hybrid search using the <strong>Reciprocal Rank Fusion (RRF)</strong> algorithm. RRF runs a BM25 lexical query and an HNSW vector query simultaneously, intelligently merging those two scoreboards to deliver highly optimized, top-tier results.</p>`
+            },
+            {
+                question: "What are multimodal embeddings and how do they enable cross-modal retrieval?",
+                answer: `<p><strong>Multimodal embeddings</strong> are deep learning models that take inputs from different data modalities, such as text, images, video, and audio, and map them into a shared vector space. This provides a unified representation space, enabling semantic search and retrieval between different data types. For example, a text query explaining a specific incident can be used to retrieve relevant images of the same scenario—a process known as <strong>cross-modal retrieval</strong>.</p>`
             }
         ];
 
