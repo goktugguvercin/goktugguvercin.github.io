@@ -246,15 +246,17 @@
                 <p>During the software lifecycle, a service can move through multiple environments from development and testing to staging. For instance, a team might build a web service for an AI annotation workflow, initially running it locally to write and test the code. This allows the team members to inspect the features, discuss and decide on how they should be refined. One of the misconceptions about services is that a program only becomes a real service once it is deployed, which is not true. Even before the deployment, it is still fully functioning as a service, but it is simply restricted to the developers rather than being open to the public. What makes a service a service is its purpose and its design pattern, not where it happens to be running.</p>
 
                 <h2>What is server?</h2>
-                <p>A server is the physical or virtual machine that provides computational and storage resources required to run such services. In this context, the term "server" refers to the role of providing services rather than a specific type of hardware. For example, a personal laptop can act as a server if it runs software that continuously listens for and processes requests. A laptop running a local PostgreSQL instance effectively functions as a database server, since it provides database services to client applications.</p>
+                <p>A server is the physical or virtual machine that provides computational and storage resources required to run such services. In this context, the term "server" refers to the role of accomodating services rather than a specific type of hardware. For example, a personal laptop can act as a server if it runs software that continuously listens for and processes requests. A laptop running a local PostgreSQL instance effectively functions as a database server, since it provides database services to client applications.</p>
 
                 <p>In data centers, physical machines serve as the underlying infrastructure. Hypervisors run on these physical machines and allocate their compute resources across multiple virtual machines (VMs). Cloud providers such as GCP, AWS, and Azure offer these virtual machines as computing resources that users can rent on demand. In the cloud computing context, the term <em>instance</em> is commonly used to refer to a single running virtual machine. Here are a few examples of how the term "instance" is used in the cloud:</p>
 
                 <ul>
-                    <li><strong>EC2 instance (AWS):</strong> A running virtual machine.</li>
-                    <li><strong>Cloud SQL instance (GCP):</strong> A managed database service backed by a virtual machine.</li>
+                    <li><strong>EC2 instance:</strong> A running virtual machine.</li>
+                    <li><strong>Cloud SQL instance:</strong> A database managemet service with a virtual machine.</li>
                     <li><strong>GKE Node:</strong> A virtual machine provisioned as a part of a Kubernetes cluster.</li>
                 </ul>
+
+                <p>While all three are virtual machines at their core, they are not the same kind of thing. An EC2 instance is essentially an empty machine, that AWS provisions with an OS and leaves the rest to us. A GKE Node, on the other hand, comes pre-installed with the Kubernetes software needed to run containerized workloads. A Cloud SQL instance goes even further. Its underlying VM is fully managed by Google and never directly exposed. What we interact with is the database service running on top of it, not the machine itself.</p>
 
                 <h2>Real-World Deployment</h2>
                 <p>Understanding the relationship between a server and a service is easiest to see in a concrete example. Let me walk through two different ways I have personally deployed the services.</p>
