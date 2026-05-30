@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optimum Library - Goktug Guvercin</title>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Optimum Library">
+    <meta property="og:description" content="How Hugging Face Optimum extends transformers and diffusers with hardware-specific exports, quantization, pruning, and inference engine integrations.">
+    <meta property="og:image" content="https://goktugguvercin.github.io/images/blogs/optimum.svg">
+    <meta property="og:url" content="https://goktugguvercin.github.io/optimum.html">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Goktug Guvercin">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Optimum Library">
+    <meta name="twitter:description" content="How Hugging Face Optimum extends transformers and diffusers with hardware-specific exports, quantization, pruning, and inference engine integrations.">
+    <meta name="twitter:image" content="https://goktugguvercin.github.io/images/blogs/optimum.svg">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              cream: '#f5ebe0',
+              gold: '#d4a373',
+              dark: '#2c2c2c',
+              sand: '#ede5d8',
+              gray: { primary: '#5a5a5a', secondary: '#666666' }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+            backgroundImage: {
+              'warm-radial': 'radial-gradient(circle at 15% 50%, rgba(212, 163, 115, 0.08) 0%, transparent 25%), radial-gradient(circle at 85% 30%, rgba(26, 115, 232, 0.05) 0%, transparent 25%)',
+            }
+          }
+        }
+      }
+    </script>
+
+    <style>
+        html { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f5ebe0; }
+        ::-webkit-scrollbar-thumb { background: #d4a373; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c29365; }
+
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .post-content {
+            background: linear-gradient(135deg, #faf7f2 0%, #e8dcc8 100%);
+            border: 2px solid rgba(212, 163, 115, 0.7);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .post-content h2 {
+            color: #1a1a1a;
+            margin-top: 2.5rem;
+            margin-bottom: 1.25rem;
+            font-size: 2rem;
+            font-weight: 700;
+            border-bottom: 2px solid rgba(212, 163, 115, 0.4);
+            padding-bottom: 0.5rem;
+        }
+
+        .post-content h3 {
+            color: #2c2c2c;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+        }
+
+        .post-content h4 {
+            color: #2c2c2c;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .post-content p {
+            margin-bottom: 1.2rem;
+            line-height: 1.8;
+        }
+
+        .post-content code {
+            background-color: #e8e8e8;
+            color: #1a1a1a;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-family: 'Courier New', 'Consolas', monospace;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .post-content pre {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .post-content pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+
+        .post-content ul {
+            margin: 1.5rem 0 !important;
+            padding-left: 2.5rem !important;
+            list-style-type: disc !important;
+            list-style-position: outside !important;
+        }
+
+        .post-content ol {
+            margin: 1.5rem 0 !important;
+            padding-left: 2.5rem !important;
+            list-style-type: decimal !important;
+            list-style-position: outside !important;
+        }
+
+        .post-content li {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+            display: list-item !important;
+            padding-left: 0.5rem;
+        }
+
+        .post-content strong {
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .post-content em {
+            font-style: italic;
+        }
+
+        .post-content figure {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .post-content figure img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .post-content figcaption {
+            margin-top: 0.75rem;
+            font-style: italic;
+            font-size: 0.95rem;
+            color: #5a5a5a;
+        }
+
+        .back-link {
+            color: #2c2c2c;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-link:hover {
+            color: #d4a373;
+        }
+
+        .tag {
+            background-color: transparent;
+            border: 1px solid #d4a373;
+            color: #8c6b4f;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: default;
+            transition: all 0.2s ease;
+        }
+
+        .tag:hover {
+            background-color: #d4a373;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-cream bg-warm-radial bg-fixed min-h-screen text-dark font-sans antialiased pb-16">
+
+    <nav class="fixed top-0 left-0 w-full z-50 bg-white/85 backdrop-blur-md border-b border-gold/30 py-4">
+        <div class="max-w-[900px] mx-auto px-8 flex justify-center gap-10">
+            <a href="index.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                About
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="projects.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Projects
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+            <a href="blog.html" class="nav-btn text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                Blog
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-full transition-all duration-300"></span>
+            </a>
+            <a href="faq.html" class="nav-btn text-gray-primary hover:text-gold relative font-serif text-lg font-semibold py-2 transition-colors duration-300">
+                FAQ
+                <span class="absolute bottom-0 left-0 h-[2px] bg-gold w-0 transition-all duration-300"></span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="mt-[120px] w-full max-w-[900px] mx-auto px-6 md:px-8 fade-in">
+
+        <a href="blog.html" class="back-link mb-8 inline-block">
+            <span>&larr;</span>
+            <span>Back to Blog</span>
+        </a>
+
+        <article>
+            <header class="mb-8">
+                <div class="text-sm uppercase tracking-wider text-gold font-bold mb-3">May 30, 2026</div>
+                <h1 class="font-serif text-4xl md:text-5xl font-bold text-dark mb-6">Optimum Library</h1>
+            </header>
+
+            <div class="post-content p-8 md:p-12 rounded-[20px] text-dark/90 text-lg">
+
+                <p>In Hugging Face, the libraries like <code>transformers</code> or <code>diffusers</code> are designed to be more general-purpose; they enable us to load, train, and run the models of different neural architectures. The main limitation is that they are not natively optimized for specific hardware environments like Intel CPUs, Nvidia GPUs or AWS Inferentia chips.</p>
+
+                <p>Optimum, as an extension of those general-purpose libraries, takes those standard models and applies hardware-specific optimizations.</p>
+
+                <h2>1. Unified Model Export &amp; Serialization</h2>
+
+                <p>Optimum exports standard framework models into production-ready formats: ONNX, TFLite, OpenVINO, Neuron, and ExecuTorch.</p>
+
+                <ul>
+                    <li>Export formats are fundamentally designed and structured for inference-only execution.</li>
+                    <li>When we export the models, we actually decouple them from heavy training frameworks. This allows for lightweight production deployment.</li>
+                    <li>The export operation unlocks hardware-specific optimizations, leading to faster inference.</li>
+                    <li>Exported static graphs are structurally stable and vastly easier to quantize.</li>
+                </ul>
+
+                <h2>2. Quantization and Model Pruning</h2>
+
+                <p>Optimum provides post-training optimization tools to decrease compute and memory footprints.</p>
+
+                <ul>
+                    <li><strong>Quantization:</strong> We convert the weights and activations from standard 32-bit floating-point (FP32) to lower precision representations like FP16, INT8, or INT4. This reduces memory usage of the model both statically (on disk/VRAM) and dynamically (at runtime), while speeding up the inference.</li>
+                    <li><strong>Pruning:</strong> It aims to remove structurally or element-wise less important connections or weights from the neural network graph to introduce sparsity and drop unneeded operations. In connection pruning an entire neuron, filter or channel is removed. Weight pruning, on the other hand, zeroes out individual small weights, but the connection still exists in the graph.</li>
+                </ul>
+
+                <h2>3. Hardware-Specific Inference Engines &amp; Wrappers</h2>
+
+                <p>Exporting a model changes its format for hardware-specific optimization, but a dedicated inference engine is required to execute and realize these optimizations on physical chips. Optimum provides wrapper classes and integrations at the top of existing third party inference engines.</p>
+
+                <figure>
+                    <img src="images/blogs/optimum.svg" alt="Mapping of Hugging Face Optimum wrappers to their underlying hardware-specific inference engines.">
+                    <figcaption>Optimum Inference Engine Wrappers</figcaption>
+                </figure>
+
+                <h2>4. Key Architectural Distinction</h2>
+
+                <p>ONNX Runtime is Microsoft's low-level inference engine for executing ONNX models. At this level, developers typically interact directly with the runtime by loading an ONNX graph into an <code>InferenceSession</code>, preparing input tensors, managing data conversions, and handling model-specific preprocessing and postprocessing logic.</p>
+
+                <p><code>optimum.onnxruntime</code> is Hugging Face's high-level integration layer built on top of ONNX Runtime. Rather than interacting with the runtime directly, users work with familiar Hugging Face abstractions such as <code>ORTModelForSequenceClassification</code>, <code>ORTModelForCausalLM</code>, <code>from_pretrained()</code>, <code>generate()</code>, and <code>pipeline()</code>.</p>
+
+                <p>The underlying execution engine remains ONNX Runtime, and therefore the performance characteristics are largely the same. The primary value of Optimum lies in ecosystem integration. Optimum's role is to bridge the Hugging Face ecosystem with that runtime. It automatically integrates model configurations, tokenizers, feature extractors, processors, generation utilities, model export workflows, and inference pipelines into a unified interface. If your starting point is a Hugging Face model and your goal is deployment or inference optimization, Optimum is usually the most convenient path.</p>
+            </div>
+
+            <div class="flex flex-wrap gap-3 mt-8">
+                <span class="tag">Hugging Face</span>
+                <span class="tag">Optimum</span>
+                <span class="tag">ONNX</span>
+                <span class="tag">Quantization</span>
+                <span class="tag">Inference</span>
+            </div>
+        </article>
+
+        <footer class="mt-16 text-center text-sm text-gray-secondary font-serif opacity-70">
+            <p>&copy; 2025 Goktug Guvercin. All rights reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
