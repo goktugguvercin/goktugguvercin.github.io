@@ -252,7 +252,7 @@
                     <li>Export formats are fundamentally designed and structured for inference-only execution.</li>
                     <li>When we export the models, we actually decouple them from heavy training frameworks. This allows for lightweight production deployment.</li>
                     <li>The export operation unlocks hardware-specific optimizations, leading to faster inference.</li>
-                    <li>Exported static graphs are structurally stable and vastly easier to quantize.</li>
+                    <li>Exported static graphs are structurally stable and easier to quantize.</li>
                 </ul>
 
                 <h2>2. Quantization and Model Pruning</h2>
@@ -264,13 +264,13 @@
                     <li><strong>Pruning:</strong> It aims to remove structurally or element-wise less important connections or weights from the neural network graph to introduce sparsity and drop unneeded operations. In connection pruning an entire neuron, filter or channel is removed. Weight pruning, on the other hand, zeroes out individual small weights, but the connection still exists in the graph.</li>
                 </ul>
 
-                <h2>3. Hardware-Specific Inference Engines &amp; Wrappers</h2>
+                <h2>3. Hardware-Specific Inference Engines</h2>
 
                 <p>Exporting a model changes its format for hardware-specific optimization, but a dedicated inference engine is required to execute and realize these optimizations on physical chips. Optimum provides wrapper classes and integrations at the top of existing third party inference engines.</p>
 
                 <figure>
                     <img src="images/blogs/optimum.svg" alt="Mapping of Hugging Face Optimum wrappers to their underlying hardware-specific inference engines.">
-                    <figcaption>Optimum Inference Engine Wrappers</figcaption>
+                    <figcaption>Architectural Schema of Optimum Library</figcaption>
                 </figure>
 
                 <h2>4. Key Architectural Distinction</h2>
