@@ -282,11 +282,9 @@
                     <li><strong>The Logging System:</strong> A mechanism that records what happened during execution and helps diagnose failures.</li>
                 </ul>
 
-                <p>We define and configure these components on the instances where we deploy our cron job.</p>
+                <p>We define and configure these components on the instances where we deploy our cron job. The following example demonstrates how a Python-based inference routine can be scheduled and executed automatically using cron.</p>
 
-                <p>The following example demonstrates how a Python-based inference routine can be scheduled and executed automatically using cron.</p>
-
-                <h2>Example: Scheduling an AI Inference Routine on EC2</h2>
+                <h2>Scheduling an AI Inference Routine on EC2</h2>
 
                 <h3>1. Create Execution Script</h3>
 
@@ -312,7 +310,7 @@ python analyze_tickets.py --max-concurrent 2
 
                 <h3>2. Configure Schedule</h3>
 
-                <p>In the second stage, we configure the scheduler by creating or modifying the user's crontab, which is a configuration file that contains scheduled tasks and their execution times. The command <code>crontab -e</code> opens the current user's crontab in a text editor. If no crontab exists yet, a new one is created automatically. We specifically add the following entry:</p>
+                <p>Then, we configure the scheduler by creating or modifying the user's crontab, which is a configuration file that contains scheduled tasks and their execution times. The command <code>crontab -e</code> opens the current user's crontab in a text editor. If no crontab exists yet, a new one is created automatically. We specifically add the following entry:</p>
 
 <pre><code>0 * * * * /home/ec2-user/ticket-analysis/run_inference.sh &gt;&gt; /home/ec2-user/ticket-analysis/logs/cron.log 2&gt;&amp;1
 </code></pre>
@@ -327,7 +325,7 @@ python analyze_tickets.py --max-concurrent 2
                     <li><code>*</code> &rarr; every day of the week (0&ndash;7)</li>
                 </ul>
 
-                <p>Cron evaluates schedules using the server's system time zone (often UTC on cloud servers). Therefore, it is good practice to verify the current server time with <code>date</code> before assuming a schedule corresponds to your local time.</p>
+                <p>Cron evaluates schedules using the server's system time zone (often UTC on cloud servers). Therefore, it is good practice to verify the current server time with date before assuming a schedule corresponds to your local time.</p>
 
                 <p>The remainder of the line specifies the command to execute and where its output will be stored.</p>
 
@@ -337,7 +335,7 @@ python analyze_tickets.py --max-concurrent 2
                     <li><code>2&gt;&amp;1</code> redirects error messages to the same log file.</li>
                 </ul>
 
-                <p>As a result, every execution of the cron job leaves a record in <code>cron.log</code>, making it easier to review execution history and troubleshoot problems.</p>
+                <p>As a result, every execution of the cron job leaves a record in the log file, making it easier to review execution history and troubleshoot problems.</p>
 
                 <h3>3. Verify Configuration</h3>
 
