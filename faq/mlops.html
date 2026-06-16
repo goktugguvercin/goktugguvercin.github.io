@@ -176,6 +176,12 @@
                 question: "What is NGINX and why is it used with Uvicorn?",
                 answer: `<p>Uvicorn is an ASGI server that listens for HTTP requests and returns responses for applications such as FastAPI. However, it is not designed to act as a full internet-facing gateway. It lacks advanced protections such as robust handling of slow clients, built-in rate limiting, and strong filtering of malformed or malicious traffic at the network level. While it supports HTTPS, it does not provide the same level of robustness and operational features as dedicated web servers or reverse proxies.</p>
                 <p>Because of these limitations, Uvicorn is typically placed behind a reverse proxy in production, such as NGINX or Caddy. These proxies can buffer requests, enforce rate limiting, and protect against abusive traffic. In addition, they handle TLS termination, managing SSL certificates, encrypting traffic with clients, and forwarding requests to Uvicorn over plain HTTP internally.</p>`
+            },
+            {
+                question: "What is Docker and what problems does it solve?",
+                answer: `<p>Docker is a software platform that enables us to package our software applications and also AI models together with their dependencies, system libraries, and specific python runtime into a self-contained, completely isolated unit called a Docker Image.</p>
+                <p>Executing and deploying an application requires manually setting up an infrastructure on the host server. This means upgrading system-level packages, defining some user permissions, configuring environment variables, creating a virtual environment, and managing version conflicts. The main drawback is that these tasks are handled at the system level. In other words, we directly interact with the server. As a result, the entire configuration becomes tightly coupled to that server. If we want to run the application on another machine, we need to replicate the exact same setup again.</p>
+                <p>Docker images solve this by completely isolating the project and its workspace from the physical server. Technically, we shift the responsibility of environment management from the server to the code artifact. Docker images can run anywhere; that is why, it eliminates the classic <em>'it works on my machine'</em> problem but also provides true application portability.</p>`
             }
         ];
 
