@@ -181,7 +181,7 @@
                 question: "What is Docker and what problems does it solve?",
                 answer: `<p>Docker is a software platform that enables us to package our software applications and also AI models together with their dependencies, system libraries, and specific python runtime into a self-contained, completely isolated unit called a Docker Image.</p>
                 <p>Executing and deploying an application requires manually setting up an infrastructure on the host server. This means upgrading system-level packages, defining some user permissions, configuring environment variables, creating a virtual environment, and managing version conflicts.</p>
-                <ul>
+                <ul class="list-disc pl-6 space-y-1">
                     <li><strong><em>Hidden System Dependencies:</em></strong> Some computer vision and AI libraries rely on low-level C++ binaries. For instance, OpenCV indirectly requires <code>libGL.so</code>, which is a core system library for OpenGL. Without Docker, we have to manually run <code>sudo apt-get install</code> on the server to get rid of possible runtime errors.</li>
                     <li><strong><em>Permission Management:</em></strong> If our application needs to write log files or save user uploads, we must configure Linux file permissions and user groups on the host.</li>
                 </ul>
