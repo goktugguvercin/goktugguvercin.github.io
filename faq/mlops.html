@@ -180,7 +180,12 @@
             {
                 question: "What is Docker and what problems does it solve?",
                 answer: `<p>Docker is a software platform that enables us to package our software applications and also AI models together with their dependencies, system libraries, and specific python runtime into a self-contained, completely isolated unit called a Docker Image.</p>
-                <p>Executing and deploying an application requires manually setting up an infrastructure on the host server. This means upgrading system-level packages, defining some user permissions, configuring environment variables, creating a virtual environment, and managing version conflicts. The main drawback is that these tasks are handled at the system level. In other words, we directly interact with the server. As a result, the entire configuration becomes tightly coupled to that server. If we want to run the application on another machine, we need to replicate the exact same setup again.</p>
+                <p>Executing and deploying an application requires manually setting up an infrastructure on the host server. This means upgrading system-level packages, defining some user permissions, configuring environment variables, creating a virtual environment, and managing version conflicts.</p>
+                <ul>
+                    <li><strong><em>Hidden System Dependencies:</em></strong> Some computer vision and AI libraries rely on low-level C++ binaries. For instance, OpenCV indirectly requires <code>libGL.so</code>, which is a core system library for OpenGL. Without Docker, we have to manually run <code>sudo apt-get install</code> on the server to get rid of possible runtime errors.</li>
+                    <li><strong><em>Permission Management:</em></strong> If our application needs to write log files or save user uploads, we must configure Linux file permissions and user groups on the host.</li>
+                </ul>
+                <p>The main drawback is that these tasks are handled at the system level. In other words, we directly interact with the server. As a result, the entire configuration becomes tightly coupled to that server. If we want to run the application on another machine, we need to replicate the exact same setup again.</p>
                 <p>Docker images solve this by completely isolating the project and its workspace from the physical server. Technically, we shift the responsibility of environment management from the server to the code artifact. Docker images can run anywhere; that is why, it eliminates the classic <em>'it works on my machine'</em> problem but also provides true application portability.</p>`
             },
             {
