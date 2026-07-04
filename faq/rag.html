@@ -175,7 +175,7 @@
             },
             {
                 question: "How do we evaluate a RAG pipeline?",
-                answer: `<p>Retrieval Augmented Generation pipelines are commonly evaluated by three different metrics: Context Relevance, Faithfulness, and Answer Relevance. They are commonly called the RAG Triad. In modern RAG systems, they are commonly evaluated using an LLM-as-a-Judge.</p>
+                answer: `<p>Retrieval Augmented Generation pipelines are commonly evaluated by three different metrics: Context Relevance, Faithfulness, and Answer Relevance. They are commonly called the RAG Triad, and their measurement is based on LLM-as-a-Judge.</p>
                 <ul class="list-disc pl-6 space-y-1">
                     <li><strong>Context Relevance:</strong> It evaluates whether the retrieved chunks are relevant to the user's query. If the chunks are annotated, this metric can be computed using a formula. Nevertheless, since ground-truth labels are often unavailable in real-world applications, it is commonly measured using an LLM-as-a-Judge. It assesses the quality of the retrieval stage.</li>
                     <li><strong>Faithfulness:</strong> It evaluates whether the generated response is factually supported by the retrieved context. A language model is configured to decompose the response into individual claims and verify whether each claim is supported by the retrieved context. The resulting score is typically normalized to the range 0-1. High scores mean that the response is well grounded on retrieved evidence and contains fewer hallucinations. This metric assesses the quality of the generation stage.</li>
