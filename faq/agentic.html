@@ -163,12 +163,8 @@
     <script>
         const qaData = [
             {
-                question: "How do you define an AI agent?",
-                answer: `<p>An AI agent is a system that orchestrates large language models together with external tools, APIs, memory, and retrieval mechanisms to plan and carry out the tasks autonomously. A language model serves as a reasoning engine: It analyzes the user request, decides which actions or operations are needed, executes specific tools to handle these actions, observes their outputs and continues this process until it completes the task. Traditional LLM applications follow a pre-determined, fixed workflow, whereas AI agents dynamically determine their own execution path and control flow based on the request and current state of the system.</p>`
-            },
-            {
-                question: "How does an AI agent work?",
-                answer: `<p>The language model in agentic systems repeatedly reasons about the current state, decides what action to take next, calls the appropriate tools, observes their outputs, updates its state, and repeats this process until the target task is completed. This iterative reasoning-action cycle is known as the agent loop. Traditional LLM applications follow a pre-defined workflow, whereas the agent loop enables the system to dynamically determine its own control flow based on the current state and the user's request.</p>`
+                question: "How do you define an AI agent and how does it work?",
+                answer: `<p>An AI agent is a system that orchestrates large language models together with external tools, APIs, memory, and retrieval mechanisms to plan and carry out the tasks autonomously. A language model serves as a reasoning and planning engine: It analyzes the user request, decides which actions or operations are needed, calls the appropriate tools to handle these actions, observes their outputs, updates its state, and repeats this process until the target task is completed. Traditional LLM applications follow a pre-determined, fixed workflow, whereas AI agents dynamically determine their own execution path through an iterative agent loop, based on the current state and the user's request.</p>`
             },
             {
                 question: "What is the role of planning in AI agents?",
