@@ -172,7 +172,7 @@
             },
             {
                 question: "What is tool calling and how does it work?",
-                answer: `<p>Large language models are capable of thinking, reasoning, generating text, and making some decisions. However, they cannot search the web, retrieve the documents, directly interact with databases, make API calls, process documents, and send emails. These capabilities go beyond what the language models can do, and commonly regarded as the tools integrated in agentic AI systems. Although an LLM cannot execute these operations, it can decide when a tool is needed and generate a structured tool (or function) call with the required arguments. The surrounding application then executes the tool, returns the result to the LLM, and the model continues its reasoning based on the observed output and state.</p>`
+                answer: `<p>Large language models are capable of thinking, reasoning, generating text, and making some decisions. However, they cannot search the web, retrieve the documents, access databases, execute API calls, process documents, and send emails. These capabilities extend beyond the native functionalities of the language models, and they are exposed as the tools integrated in agentic AI systems. In practice, these tools are implemented as functions or other executable components, such as scripts or services. When the language model determines that a tool is needed, it generates a structured function call request, typically represented as JSON to contain the function name and necessary input arguments. The language model then continues its reasoning based on the updated state, repeating this process until the task is completed.</p>`
             }
         ];
 
