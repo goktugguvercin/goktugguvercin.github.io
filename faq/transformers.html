@@ -160,16 +160,56 @@
             <p class="text-lg text-gray-secondary italic">Self-attention, multi-head attention, and transformer architectures</p>
         </header>
 
-        <main class="space-y-5" id="qaList">
-            <div class="coming-soon">
-                <p class="text-xl font-serif text-dark/40">Questions coming soon...</p>
-                <p class="text-gray-secondary mt-2">This category is being prepared with detailed explanations.</p>
-            </div>
-        </main>
+        <main class="space-y-5" id="qaList"></main>
 
         <footer class="mt-20 text-center text-sm text-gray-secondary font-serif opacity-70">
             <p>&copy; 2025 Goktug Guvercin. All rights reserved.</p>
         </footer>
     </div>
+
+    <script>
+        const qaData = [
+            {
+                question: "Can you explain the high-level intuition behind the self-attention mechanism?",
+                answer: `<p>Each token initially has its own representation. Self-attention determines which other tokens are relevant to target token, gathers information from them, and combines their information with the token's own representation. This produces a new context-dependent representation for that token which reflects not only the token's identity, but also its relationship with the rest of the sequence. This is accomplished  as a soft information retrieval system.</p>`
+            },
+            {
+                question: "Can you explain the roles of Queries, Keys, and Values in the attention mechanism?",
+                answer: `<p>Every token searches the sequence for other tokens that are relevant to it. This search is carried out by a query vector. That is why, each token has its own query vector that it uses to look for related tokens.</p>
+                <p>The tokens are not only searchers, but also they can be found and selected. Every token needs a way to be discoverable by other tokens' search. This is handled by key vector. When a token searches, its query vector is compared against the key vectors of all other tokens, and the strength of these comparisons showcases how relevant those tokens are.</p>
+                <p>Query and key vectors determine where to attend and how much to attend. However, they do not carry actual content. That is the role of value vector. It refers to what the token expresses, the information itself.</p>`
+            }
+        ];
+
+        const qaList = document.getElementById('qaList');
+
+        qaData.forEach((item, idx) => {
+            const card = document.createElement('div');
+            card.className = 'qa-card';
+            card.innerHTML = `
+                <div class="qa-question" onclick="toggleAnswer(${idx})">
+                    <span class="font-semibold text-lg text-dark">${item.question}</span>
+                    <span class="qa-arrow text-gold text-sm" id="arrow-${idx}">&#9660;</span>
+                </div>
+                <div class="qa-answer" id="answer-${idx}">
+                    <div class="px-6 pb-5 pt-2 text-dark/85 leading-relaxed space-y-3">
+                        ${item.answer}
+                    </div>
+                </div>
+            `;
+            qaList.appendChild(card);
+        });
+
+        if (window.MathJax && MathJax.typesetPromise) {
+            MathJax.typesetPromise();
+        }
+
+        function toggleAnswer(idx) {
+            const answer = document.getElementById(`answer-${idx}`);
+            const arrow = document.getElementById(`arrow-${idx}`);
+            answer.classList.toggle('open');
+            arrow.classList.toggle('rotated');
+        }
+    </script>
 </body>
 </html>
